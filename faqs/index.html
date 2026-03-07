@@ -305,13 +305,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ═══ PAGE HERO ═══ */
 .page-hero {
   position: relative; padding: 200px 24px 100px;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
+  display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden;
 }
 @media (max-width: 768px) { .page-hero { padding: 140px 24px 60px; } }
 .page-hero::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 900px;
-  background: radial-gradient(ellipse at center top, rgba(145,130,104,0.05) 0%, transparent 65%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse at center, rgba(145,130,104,0.04) 0%, transparent 60%);
   pointer-events: none;
 }
 .page-hero-label {
@@ -481,8 +481,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: white;
   margin-bottom: 32px;
 }
-.footer-cta .shader-btn-wrap { margin-bottom: 16px; }
-.footer-cta p { max-width: 512px; color: #71717a; }
+.footer-cta .shader-btn-wrap { margin-bottom: 0; }
 
 .footer-bottom-outer {
   margin-top: 160px;
@@ -695,7 +694,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         <div class="faq-icon"></div>
       </button>
       <div class="faq-answer">
-        <p>When a territory is claimed, it is removed from availability. The territory holder becomes the sole recipient of every inbound client referral routed to that market. No other agent can hold or compete for that territory while the membership is active.</p>
+        <p>When a territory is secured, it is removed from availability. The territory holder becomes the sole recipient of every inbound client referral routed to that market. No other agent can hold or compete for that territory while the membership is active.</p>
       </div>
     </div>
 
@@ -731,11 +730,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
     <div class="faq-item fade-in">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>What if my territory is already claimed?</span>
+        <span>What if my territory is already reserved?</span>
         <div class="faq-icon"></div>
       </button>
       <div class="faq-answer">
-        <p>Apply anyway. If approved and the territory is taken, priority waitlist placement is available. Adjacent or related territories may also be claimed. Territories do not reopen often.</p>
+        <p>Apply anyway. If approved and the territory is held, priority waitlist placement is available. Adjacent or related territories may also be secured. Territories do not reopen often.</p>
       </div>
     </div>
 
@@ -758,7 +757,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         <div class="faq-icon"></div>
       </button>
       <div class="faq-answer">
-        <p>Approximately two minutes. Most decisions within 24 hours. Territory availability and next steps are confirmed upon approval.</p>
+        <p>The application is brief. Review decisions are typically issued within 24–48 hours. Territory availability and next steps are confirmed upon approval.</p>
       </div>
     </div>
 
@@ -768,7 +767,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         <div class="faq-icon"></div>
       </button>
       <div class="faq-answer">
-        <p>Membership dues are territory-based. Pricing reflects market size, velocity, and demand. EARN takes zero commission on any referral transactions — dues secure exclusive territorial rights and access to the referral infrastructure. Details are provided upon application approval. Territories are claimed on a first-approved basis.</p>
+        <p>Membership dues are territory-based. Pricing reflects market size, velocity, and demand. EARN takes zero commission on any referral transactions — dues secure exclusive territorial rights and access to the referral infrastructure. Details are provided upon application approval. Territories are secured on a first-approved basis.</p>
       </div>
     </div>
 
@@ -910,7 +909,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   <div class="footer-cta fade-in">
     <h2>Acceptance is by Invitation or Nomination.</h2>
     <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Territory Access</button></div>
-    <p style="font-size:13px;color:#8a8a8a;letter-spacing:0.01em;margin-top:16px;">Application takes two minutes. Most approvals within 24 hours.</p>
   </div>
   <div class="footer-bottom-outer">
     <div class="footer-bottom">
