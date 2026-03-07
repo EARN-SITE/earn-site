@@ -305,13 +305,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ═══ PAGE HERO ═══ */
 .page-hero {
   position: relative; padding: 200px 24px 100px;
-  display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 @media (max-width: 768px) { .page-hero { padding: 140px 24px 60px; } }
 .page-hero::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 800px; height: 600px;
-  background: radial-gradient(ellipse at center, rgba(145,130,104,0.04) 0%, transparent 60%);
+  width: 900px; height: 900px;
+  background: radial-gradient(ellipse at center top, rgba(145,130,104,0.05) 0%, transparent 65%);
   pointer-events: none;
 }
 .page-hero-label {
