@@ -288,7 +288,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-weight: 300;
   letter-spacing: -0.02em;
   color: #d4d4d8;
-  padding: 20px 0;
+  padding: 16px 0;
   transition: color 0.3s, transform 0.3s;
   transform: translateY(20px);
   opacity: 0;
@@ -299,12 +299,76 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .mobile-menu.open .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; }
 .mobile-menu.open .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.open .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; }
 .mobile-menu-link:hover { color: white; }
+
+/* Member Portal link in mobile menu */
+.mobile-menu-portal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  padding: 0;
+  transition: color 0.3s, transform 0.3s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+.mobile-menu.open .mobile-menu-portal {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+.mobile-menu-portal:hover { color: var(--gold-light); }
+.mobile-menu-portal svg { width: 18px; height: 18px; }
+
+/* Separator rule */
+.mobile-menu-rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(145, 130, 104, 0.3);
+  margin: 24px auto;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.mobile-menu.open .mobile-menu-rule {
+  opacity: 1;
+  transition-delay: 0.25s;
+}
+
+/* Action group below separator */
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding-top: 4px;
+}
+
+/* Request Access CTA in mobile menu */
+.mobile-menu-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu.open .mobile-menu-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.38s;
+}
+.mobile-menu-cta .shader-btn.lg {
+  padding: 14px 36px;
+}
 
 @media (max-width: 960px) {
   .nav-center { display: none; }
   .nav-hamburger { display: flex; }
   .nav-right { gap: 12px; }
+  .nav-signin { display: none; }
 }
 @media (max-width: 768px) {
   .nav-center { display: none; }
@@ -313,9 +377,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav-right { gap: 10px; }
 }
 @media (max-width: 480px) {
+  .nav-left a img { height: 22px !important; }
   .nav-right { gap: 8px; }
-  .nav-signin span { display: none; }
-  .nav-signin { gap: 0; }
+  .nav-signin { display: none; }
 }
 
 /* ═══════════════════════════════════════
@@ -1753,6 +1817,29 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   <div class="mobile-menu-inner">
     <a href="/team" class="mobile-menu-link">Team</a>
     <a href="/faqs" class="mobile-menu-link">FAQ</a>
+    <a href="/application" class="mobile-menu-link">Apply</a>
+    <div class="mobile-menu-rule"></div>
+    <div class="mobile-menu-actions">
+      <a href="https://app.eliteagentreferralnetwork.com/signin" class="mobile-menu-portal">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#918268">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.25C5.28921 2.25 2.25 5.28921 2.25 9C2.25 9.41421 1.91421 9.75 1.5 9.75C1.08579 9.75 0.75 9.41421 0.75 9C0.75 4.46079 4.46079 0.75 9 0.75C10.2808 0.75 11.544 1.0482 12.6895 1.62098C13.8351 2.19375 14.8315 3.02538 15.6 4.05C15.8485 4.38137 15.7814 4.85147 15.45 5.1C15.1186 5.34853 14.6485 5.28137 14.4 4.95C13.7713 4.11168 12.956 3.43125 12.0187 2.96262C11.0814 2.49398 10.0479 2.25 9 2.25Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00227 6.79192C5.39332 6.92848 5.59963 7.3562 5.46307 7.74725C5.32495 8.1428 5.25001 8.56182 5.25001 8.99999C5.25001 11.3103 4.86773 13.6435 4.46152 14.8622C4.33053 15.2551 3.90579 15.4675 3.51283 15.3365C3.11988 15.2055 2.90751 14.7808 3.03849 14.3878C3.38228 13.3565 3.75001 11.1897 3.75001 8.99999C3.75001 8.38816 3.85507 7.80218 4.04694 7.25273C4.1835 6.86167 4.61121 6.65536 5.00227 6.79192Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.409 7.40901C7.83096 6.98705 8.40326 6.75 8.99999 6.75C9.41421 6.75 9.74999 7.08579 9.74999 7.5C9.74999 7.91421 9.41421 8.25 8.99999 8.25C8.80108 8.25 8.61032 8.32902 8.46966 8.46967C8.32901 8.61032 8.24999 8.80109 8.24999 9C8.24999 9.80241 8.17214 10.9493 8.05071 12.0801C8.00648 12.4919 7.63676 12.7899 7.22492 12.7457C6.81307 12.7015 6.51506 12.3318 6.55928 11.9199C6.67785 10.8157 6.74999 9.72759 6.74999 9C6.74999 8.40326 6.98705 7.83097 7.409 7.40901Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0006 5.2471C8.34214 5.247 7.69525 5.42027 7.125 5.74951C6.76628 5.95661 6.30759 5.83371 6.10048 5.47499C5.89338 5.11627 6.01628 4.65757 6.375 4.45047C7.17335 3.98954 8.07899 3.74695 9.00084 3.7471C9.9227 3.74725 10.8283 3.99013 11.6265 4.45131C12.4247 4.91249 13.0874 5.57572 13.5479 6.37429C14.0084 7.17286 14.2506 8.07861 14.25 9.00047L13.5 8.99999H14.25V9.00047V9.00118C14.25 9.35418 14.25 9.8865 14.2348 10.5181C14.2248 10.9321 13.881 11.2597 13.4669 11.2498C13.0528 11.2398 12.7252 10.896 12.7352 10.4819C12.75 9.86919 12.75 9.352 12.75 8.99999V8.99951C12.7504 8.34104 12.5775 7.69407 12.2485 7.12366C11.9195 6.55326 11.4462 6.07952 10.876 5.75011C10.3059 5.42069 9.65907 5.24721 9.0006 5.2471Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 9.09C10.9142 9.09 11.25 9.42578 11.25 9.84V9.84866C11.25 10.7378 11.25 11.9578 11.154 13.1943C11.0586 14.4229 10.8645 15.7333 10.4464 16.7785C10.2925 17.1631 9.85605 17.3502 9.47146 17.1964C9.08687 17.0425 8.89981 16.606 9.05364 16.2215C9.38554 15.3917 9.56639 14.2646 9.6585 13.0782C9.74969 11.9037 9.75 10.7351 9.75 9.84C9.75 9.42578 10.0858 9.09 10.5 9.09Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4151 12.7535C13.8274 12.7936 14.1291 13.1603 14.089 13.5726C14.0323 14.1551 13.7924 15.4649 13.7029 15.9121C13.6217 16.3182 13.2266 16.5817 12.8204 16.5004C12.4142 16.4192 12.1508 16.0241 12.2321 15.6179C12.3226 15.1651 12.5477 13.9248 12.596 13.4274C12.6361 13.0151 13.0028 12.7134 13.4151 12.7535Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.04535 14.2614C7.45326 14.3334 7.72558 14.7224 7.65359 15.1303C7.57063 15.6005 7.41794 16.0665 7.28605 16.4691C7.25674 16.5586 7.22846 16.6449 7.2022 16.7274C7.07661 17.1221 6.65482 17.3403 6.2601 17.2147C5.86539 17.0891 5.64722 16.6673 5.77281 16.2726C5.80737 16.164 5.84126 16.0601 5.874 15.9597C6.00284 15.5648 6.11375 15.2248 6.17642 14.8697C6.2484 14.4618 6.63743 14.1894 7.04535 14.2614Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.2009 6.76496C16.6069 6.68263 17.0027 6.94499 17.085 7.35094C17.1225 7.53583 17.1456 7.83904 17.1616 8.15923C17.1786 8.4994 17.1898 8.91699 17.1931 9.36365C17.1996 10.2518 17.1751 11.286 17.0963 12.0746C17.0551 12.4868 16.6875 12.7875 16.2754 12.7463C15.8632 12.7051 15.5625 12.3375 15.6037 11.9254C15.6749 11.214 15.6995 10.2405 15.6931 9.37471C15.6899 8.94443 15.6792 8.54856 15.6635 8.23393C15.6468 7.89932 15.6266 7.70641 15.615 7.64905C15.5326 7.2431 15.795 6.84728 16.2009 6.76496Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 12C0.75 11.5858 1.08579 11.25 1.5 11.25H1.5075C1.92171 11.25 2.2575 11.5858 2.2575 12C2.2575 12.4142 1.92171 12.75 1.5075 12.75H1.5C1.08579 12.75 0.75 12.4142 0.75 12Z"/>
+          </g>
+        </svg>
+        <span>Member Portal</span>
+      </a>
+      <div class="mobile-menu-cta">
+        <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Access</button></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1928,8 +2015,16 @@ const hamburger = document.getElementById('navHamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 if (hamburger && mobileMenu) {
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
   });
 }
 
