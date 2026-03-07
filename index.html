@@ -19,7 +19,7 @@
 <!-- Fonts: Inter + Cormorant Garamond -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 
 <style>
 /* ═══════════════════════════════════════
@@ -80,54 +80,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   pointer-events: none;
 }
 
-.glass-elevated {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(32px) saturate(160%);
-  -webkit-backdrop-filter: blur(32px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 0 rgba(255, 255, 255, 0.02), 0 16px 48px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-.glass-elevated::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 35%);
-  pointer-events: none;
-}
-
-.glass-button {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.07) 100%);
-  backdrop-filter: blur(40px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), inset 0 0 16px rgba(255, 255, 255, 0.04), 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 48px rgba(255, 255, 255, 0.04);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glass-button:hover {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.12) 100%);
-  border-color: rgba(255, 255, 255, 0.38);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), inset 0 0 20px rgba(255, 255, 255, 0.06), 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 72px rgba(255, 255, 255, 0.06);
-  transform: translateY(-1px);
-}
-
-.glass-button-outline {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(32px) saturate(160%);
-  -webkit-backdrop-filter: blur(32px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 2px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glass-button-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
 .glass-badge {
   background: rgba(145, 130, 104, 0.08);
   backdrop-filter: blur(8px);
@@ -142,6 +94,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @keyframes marquee {
   0% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .territory-carousel-track,
+  .members-track {
+    animation-play-state: paused;
+  }
 }
 .animate-marquee {
   animation: marquee 60s linear infinite;
@@ -447,10 +406,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hero-content h1 {
   font-family: 'Cormorant Garamond', 'Georgia', serif;
-  font-size: clamp(3.2rem, 5.5vw, 75px);
+  font-size: clamp(3.2rem, 6.5vw, 96px);
   line-height: 1.08;
   font-weight: 400;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.06em;
   color: white;
 }
 .hero-content p {
@@ -459,20 +418,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.7;
   color: #a1a1aa;
 }
-.hero-cta {
-  margin-top: 8px;
-  border-radius: 9999px;
-  padding: 16px 40px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  color: white;
-}
-
 /* ═══════════════════════════════════════
    PROOF BAR
    ═══════════════════════════════════════ */
-.proof-bar { padding: 48px 24px; }
+.proof-bar { padding: 80px 24px; }
 .proof-bar-inner {
   max-width: 960px;
   margin: 0 auto;
@@ -518,24 +467,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ═══════════════════════════════════════ */
 .anti-platform {
   position: relative;
-  padding: 80px 24px 128px;
+  padding: 240px 24px;
 }
 @media (max-width: 768px) {
-  .anti-platform { padding: 60px 24px 80px; }
+  .anti-platform { padding: 140px 24px; }
 }
 .anti-platform-inner {
   max-width: 1152px;
   margin: 0 auto;
 }
 .anti-header {
-  margin-bottom: 80px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   text-align: center;
 }
-@media (max-width: 768px) { .anti-header { margin-bottom: 48px; } }
+@media (max-width: 768px) { .anti-header { margin-bottom: 0; } }
 .anti-header h2 {
   font-family: 'Cormorant Garamond', 'Georgia', serif;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -550,83 +499,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.7;
   color: #a1a1aa;
 }
-.anti-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
-@media (max-width: 768px) { .anti-grid { grid-template-columns: 1fr; } }
-
-.anti-card { border-radius: 16px; padding: 40px; }
-@media (max-width: 768px) { .anti-card { padding: 24px; } }
-/* dimmed style removed */
-
-.anti-badge {
-  display: inline-block;
-  margin-bottom: 32px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  padding: 6px 16px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #71717a;
-}
-.anti-badge-gold {
-  display: inline-block;
-  margin-bottom: 32px;
-  border-radius: 9999px;
-  padding: 6px 16px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-}
-
-.anti-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.anti-icon {
-  display: flex;
-  width: 48px;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  flex-shrink: 0;
-}
-.anti-icon-gold {
-  display: flex;
-  width: 48px;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  border: 1px solid rgba(145,130,104,0.2);
-  background: rgba(145,130,104,0.1);
-  box-shadow: inset 0 1px 0 0 rgba(145,130,104,0.15);
-  flex-shrink: 0;
-}
-.anti-row span.strike { color: #71717a; text-decoration: line-through; }
-.anti-row span.bright { color: white; }
-.anti-row .x-icon { margin-left: auto; color: #52525b; }
-.anti-row .check-icon { margin-left: auto; color: var(--gold); }
-
-.anti-quote {
-  margin-top: 16px;
-  border-radius: 12px;
-  padding: 24px;
-}
-.anti-quote p { font-size: 14px; line-height: 1.7; color: #a1a1aa; }
-.anti-quote .attr { margin-top: 12px; font-size: 12px; letter-spacing: 0.05em; color: #52525b; }
 
 /* ═══════════════════════════════════════
    UNFAIR ADVANTAGE (Phone + Copy)
@@ -636,20 +508,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   overflow: hidden;
   padding: 128px 24px 160px;
 }
+.unfair::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(145,130,104,0.04) 0%, rgba(145,130,104,0.02) 35%, transparent 70%);
+  pointer-events: none;
+}
 @media (max-width: 768px) { .unfair { padding: 80px 24px 96px; } }
 .unfair-inner {
   max-width: 1152px;
   margin: 0 auto;
 }
-.unfair-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 80px;
-}
 @media (max-width: 768px) {
-  .unfair-grid { grid-template-columns: 1fr; gap: 48px; }
-  .unfair-phone-col { order: -1; }
 }
 
 /* Phone mockup */
@@ -779,60 +655,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .phone-glow {
   position: absolute;
-  inset: -80px;
+  inset: -160px;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(145,130,104,0.06) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 50% 45%, rgba(145,130,104,0.08) 0%, rgba(145,130,104,0.04) 30%, rgba(145,130,104,0.01) 55%, transparent 80%);
   opacity: 0;
-  transition: opacity 2.5s;
+  transition: opacity 3s;
 }
 .phone-glow.visible { opacity: 1; }
 
 /* Right copy */
-.unfair-copy { display: flex; flex-direction: column; gap: 40px; }
-.unfair-copy h2 {
-  max-width: 480px;
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.15;
-  font-weight: 400;
-  color: white;
-}
-.unfair-copy .body-text {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.unfair-copy .body-text p {
-  max-width: 448px;
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: #a1a1aa;
-}
-.protocol-card {
-  border-radius: 16px;
-  padding: 20px 24px;
-}
-.protocol-card .label {
-  margin-bottom: 8px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #71717a;
-}
-.protocol-card .title {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: white;
-}
-.protocol-card .sub {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #71717a;
-}
-
 /* ═══════════════════════════════════════
    VETTING TICKER (Brokerage Marquee)
    ═══════════════════════════════════════ */
@@ -957,62 +789,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #a1a1aa;
 }
 
-.territory-map-card {
-  border-radius: 16px;
-  padding: 16px;
-  overflow: hidden;
-  position: relative;
-}
-@media (min-width: 768px) { .territory-map-card { padding: 32px; } }
-
-.territory-grid-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
 /* Simple territory grid instead of react-simple-maps (which needs React) */
-.territory-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 32px 0;
-}
-@media (max-width: 768px) { .territory-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .territory-grid { grid-template-columns: 1fr; } }
-
-.territory-cell {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.02);
-  transition: background 0.3s;
-}
-.territory-cell:hover {
-  background: rgba(255,255,255,0.04);
-}
-.territory-cell .city {
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-}
-.territory-cell .status {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.territory-cell .status.reserved { color: var(--gold); }
-.territory-cell .status.available { color: rgba(255,255,255,0.5); }
-
 /* Pulsing dot for available */
 .pulse-dot {
   position: relative;
@@ -1041,14 +818,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   100% { transform: scale(2.5); opacity: 0; }
 }
 
-.territory-legend {
-  position: relative;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-}
 .legend-item {
   display: flex;
   align-items: center;
@@ -1068,48 +837,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #71717a;
 }
 
-.anti-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  max-width: 960px;
-  margin: 0 auto;
-  border-top: 1px solid rgba(145,130,104,0.2);
-}
-@media (max-width: 768px) { .anti-columns { grid-template-columns: 1fr; } }
-.anti-col {
-  padding: 40px 32px;
-  border-right: 1px solid rgba(255,255,255,0.04);
-}
-.anti-col:last-child { border-right: none; }
 @media (max-width: 768px) {
-  .anti-col {
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding: 32px 0;
-  }
-  .anti-col:last-child { border-bottom: none; }
 }
-.anti-col h3 {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 500;
-  color: white;
-  margin-bottom: 12px;
-}
-.anti-col p {
-  font-size: 15px;
-  line-height: 1.65;
-  color: #71717a;
-}
-
 /* ═══════════════════════════════════════
    HOW IT WORKS
    ═══════════════════════════════════════ */
 .how-it-works {
-  padding: 160px 24px 80px;
+  padding: 160px 24px 128px;
 }
-@media (max-width: 768px) { .how-it-works { padding: 80px 24px 60px; } }
+@media (max-width: 768px) { .how-it-works { padding: 80px 24px 80px; } }
 .how-inner {
   max-width: 1060px;
   margin: 0 auto;
@@ -1339,7 +1075,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-shrink: 0;
   gap: 24px;
   padding-right: 24px;
-  animation: marquee 70s linear infinite;
+  animation: marquee 70s linear infinite reverse;
 }
 
 .member-card {
@@ -1400,14 +1136,48 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ═══════════════════════════════════════
+   ATMOSPHERIC DIVIDER — now integrated
+   into member credential section
+   ═══════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
    MEMBER CREDENTIAL
    ═══════════════════════════════════════ */
 .member-credential {
-  padding: 140px 24px 100px;
+  position: relative;
+  padding: 180px 24px 160px;
+  overflow: hidden;
 }
-@media (max-width: 768px) { .member-credential { padding: 80px 24px 80px; } }
+@media (max-width: 768px) { .member-credential { padding: 100px 24px 80px; } }
+.member-credential-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url(/images/atmo-obsidian.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+}
+.member-credential-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to bottom, #050505 15%, rgba(5,5,5,0.6) 45%, transparent);
+  z-index: 1;
+}
+.member-credential-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to top, #050505 15%, rgba(5,5,5,0.6) 45%, transparent);
+  z-index: 1;
+}
 .mc-inner {
-  max-width: 480px;
+  max-width: 560px;
   margin: 0 auto;
   text-align: center;
 }
@@ -1417,10 +1187,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--text-primary);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 .mc-seal {
-  margin-bottom: 32px;
+  margin-top: -20px;
+  margin-bottom: 40px;
 }
 .mc-seal svg {
   display: block;
@@ -1539,8 +1310,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: white;
   margin-bottom: 32px;
 }
-.footer-cta .shader-btn-wrap { margin-bottom: 16px; }
-.footer-cta p { max-width: 512px; color: #71717a; }
+.footer-cta .shader-btn-wrap { margin-bottom: 0; }
 
 .footer-bottom-outer {
   margin-top: 160px;
@@ -1598,13 +1368,41 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: translateY(0);
 }
 
+/* Pure materialization — no movement, just appears */
+.fade-in-subtle {
+  opacity: 0;
+  transition: opacity 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-subtle.visible {
+  opacity: 1;
+}
+
+/* Prestige emerge — slight scale with slow reveal */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 3.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 3.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Heavy rise — deeper, slower, deliberate */
+.fade-in-rise {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 2.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-rise.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ═══════════════════════════════════════
    SVG ICONS INLINE
    ═══════════════════════════════════════ */
 .icon { width: 20px; height: 20px; flex-shrink: 0; }
-.icon-sm { width: 16px; height: 16px; flex-shrink: 0; }
-.icon-lg { width: 24px; height: 24px; flex-shrink: 0; }
-
 /* ═══════════════════════════════════════
    SHADER BUTTON
    ═══════════════════════════════════════ */
@@ -1756,7 +1554,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
       <span style="display:block;">The Definitive Network</span>
       <span style="display:block;">for Top Producers</span>
     </h1>
-    <p style="color:#71717a;margin-top:16px;letter-spacing:0.02em;">One agent per market. Invitation only.</p>
+    <p style="color:#a1a1aa;margin-top:16px;letter-spacing:0.02em;">One agent per market. Invitation only.</p>
   </div>
 </section>
 
@@ -1925,23 +1723,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      ═══════════════════════════════════════ -->
 <section class="anti-platform">
   <div class="anti-platform-inner">
-    <div class="anti-header fade-in">
+    <div class="anti-header fade-in-subtle">
       <h2>No Masterminds. No Group Chats.<br>No Forums. Just Revenue.</h2>
-    </div>
-
-    <div class="anti-columns fade-in" style="transition-delay:0.15s;">
-      <div class="anti-col">
-        <h3>Automated Routing</h3>
-        <p>Client referrals are matched and routed. No searching, no asking.</p>
-      </div>
-      <div class="anti-col">
-        <h3>Signed Agreements</h3>
-        <p>Every referral is legally documented before introduction.</p>
-      </div>
-      <div class="anti-col">
-        <h3>Zero Commission to EARN</h3>
-        <p>Agent-to-agent referral terms. EARN never takes a cut.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1952,7 +1735,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      ═══════════════════════════════════════ -->
 <section class="territory">
   <div class="territory-inner">
-    <div class="territory-header fade-in">
+    <div class="territory-header fade-in-rise">
       <h2>Exclusivity.</h2>
       <p>Each territory is held by one agent. All inbound referral volume for that market routes exclusively to the territory holder. No rotation. No competition.</p>
     </div>
@@ -1969,7 +1752,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Vancouver</span>
               <span class="territory-card-area">Downtown & West End</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -1977,7 +1760,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Toronto</span>
-              <span class="territory-card-area">7 Territories Available</span>
+              <span class="territory-card-area">West End</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -1987,7 +1770,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Calgary</span>
               <span class="territory-card-area">Central Calgary</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -1995,7 +1778,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Montreal</span>
-              <span class="territory-card-area">7 Territories Available</span>
+              <span class="territory-card-area">Downtown & Central Districts</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -2005,7 +1788,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Ottawa</span>
               <span class="territory-card-area">East Ottawa</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Winnipeg</span>
+              <span class="territory-card-area">Central Winnipeg</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2014,7 +1806,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Edmonton</span>
               <span class="territory-card-area">South Edmonton</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2022,17 +1814,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Victoria</span>
-              <span class="territory-card-area">Greater Victoria</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Winnipeg</span>
-              <span class="territory-card-area">4 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+              <span class="territory-card-area">Victoria</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2041,25 +1824,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">North Vancouver</span>
               <span class="territory-card-area">North Vancouver</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="quebec-city" style="background-image:url(/images/territories/quebec-city.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Quebec City</span>
-              <span class="territory-card-area">3 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="mississauga" style="background-image:url(/images/territories/mississauga.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Mississauga</span>
-              <span class="territory-card-area">3 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2068,7 +1833,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Belleville</span>
               <span class="territory-card-area">Belleville</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="saanich" style="background-image:url(/images/territories/saanich.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Saanich</span>
+              <span class="territory-card-area">Saanich</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -2076,7 +1850,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Hamilton</span>
-              <span class="territory-card-area">3 Territories Available</span>
+              <span class="territory-card-area">Ancaster, Dundas & West Hamilton</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -2085,8 +1859,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Sudbury</span>
-              <span class="territory-card-area">Greater Sudbury</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-area">Sudbury</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <!-- SET 2 (duplicate for infinite scroll) -->
@@ -2096,7 +1870,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Vancouver</span>
               <span class="territory-card-area">Downtown & West End</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -2104,7 +1878,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Toronto</span>
-              <span class="territory-card-area">7 Territories Available</span>
+              <span class="territory-card-area">West End</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -2114,7 +1888,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Calgary</span>
               <span class="territory-card-area">Central Calgary</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -2122,7 +1896,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Montreal</span>
-              <span class="territory-card-area">7 Territories Available</span>
+              <span class="territory-card-area">Downtown & Central Districts</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -2132,7 +1906,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Ottawa</span>
               <span class="territory-card-area">East Ottawa</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Winnipeg</span>
+              <span class="territory-card-area">Central Winnipeg</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2141,7 +1924,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Edmonton</span>
               <span class="territory-card-area">South Edmonton</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2149,17 +1932,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Victoria</span>
-              <span class="territory-card-area">Greater Victoria</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Winnipeg</span>
-              <span class="territory-card-area">4 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+              <span class="territory-card-area">Victoria</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2168,25 +1942,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">North Vancouver</span>
               <span class="territory-card-area">North Vancouver</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="quebec-city" style="background-image:url(/images/territories/quebec-city.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Quebec City</span>
-              <span class="territory-card-area">3 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
-            </div>
-          </div>
-          <div class="territory-card available">
-            <div class="territory-card-img" data-city="mississauga" style="background-image:url(/images/territories/mississauga.webp);"></div>
-            <div class="territory-card-overlay"></div>
-            <div class="territory-card-content">
-              <span class="territory-card-city">Mississauga</span>
-              <span class="territory-card-area">3 Territories Available</span>
-              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card claimed">
@@ -2195,7 +1951,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-content">
               <span class="territory-card-city">Belleville</span>
               <span class="territory-card-area">Belleville</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="saanich" style="background-image:url(/images/territories/saanich.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Saanich</span>
+              <span class="territory-card-area">Saanich</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
           <div class="territory-card available">
@@ -2203,7 +1968,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Hamilton</span>
-              <span class="territory-card-area">3 Territories Available</span>
+              <span class="territory-card-area">Ancaster, Dundas & West Hamilton</span>
               <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
             </div>
           </div>
@@ -2212,8 +1977,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
             <div class="territory-card-overlay"></div>
             <div class="territory-card-content">
               <span class="territory-card-city">Sudbury</span>
-              <span class="territory-card-area">Greater Sudbury</span>
-              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Claimed</span>
+              <span class="territory-card-area">Sudbury</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
             </div>
           </div>
         </div>
@@ -2222,10 +1987,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
     <div class="fade-in" style="text-align:center;margin-top:32px;transition-delay:0.25s;">
       <div style="display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:16px;">
-        <div class="legend-item"><div class="legend-dot gold"></div><span class="legend-text">Claimed</span></div>
+        <div class="legend-item"><div class="legend-dot gold"></div><span class="legend-text">Reserved</span></div>
         <div class="legend-item"><div class="legend-dot white"></div><span class="legend-text">Available</span></div>
       </div>
-      <p style="font-size:13px;font-style:italic;color:#52525b;">Territories are claimed upon application approval.</p>
+      <p style="font-size:13px;font-style:italic;color:#52525b;">Territories are secured upon application approval.</p>
     </div>
   </div>
 </section>
@@ -2235,7 +2000,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      MEMBERSHIP (Agent Carousel)
      ═══════════════════════════════════════ -->
 <section class="membership">
-  <div class="membership-header fade-in">
+  <div class="membership-header fade-in-rise">
     <span style="font-size:12px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:#787060;">Elite Members</span>
     <h2 style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2.5rem,5vw,4.5rem);">The Standard.</h2>
     <p>Every territory holder in the network represents the highest tier of production and client service in their market.</p>
@@ -2268,15 +2033,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 </section>
 
 
-
 <!-- ═══════════════════════════════════════
      MEMBER CREDENTIAL
      ═══════════════════════════════════════ -->
 <section class="member-credential">
-  <div class="mc-inner">
-    <h2 class="mc-headline fade-in">Certified Elite.</h2>
-    <div class="mc-seal fade-in" style="transition-delay:0.1s;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 285" width="200" height="219">
+  <div class="member-credential-bg"></div>
+  <div class="member-credential-fade-top"></div>
+  <div class="member-credential-fade-bottom"></div>
+  <div class="mc-inner" style="position:relative;z-index:2;">
+    <h2 class="mc-headline">Certified Elite.</h2>
+    <div class="mc-seal fade-in-scale" style="transition-delay:0.6s;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 285" width="280" height="307">
         <g transform="translate(130,130)">
           <circle r="76" fill="none" stroke="#918268" stroke-width="2"/>
           <circle r="72" fill="none" stroke="#918268" stroke-width="0.5"/>
@@ -2297,7 +2064,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         <text x="130" y="270" text-anchor="middle" fill="white" font-family="'Cormorant Garamond',Georgia,serif" font-size="22" font-weight="400" letter-spacing="0.02em">Verified Member</text>
       </svg>
     </div>
-    <p class="mc-statement fade-in" style="transition-delay:0.15s;">A credential mark issued to every territory holder. Displayed on member websites, signatures, and client-facing materials.</p>
+    <p class="mc-statement fade-in-subtle" style="transition-delay:1.2s;">A credential mark issued to every territory holder. Displayed on member websites, signatures, and client-facing materials.</p>
   </div>
 </section>
 
@@ -2307,7 +2074,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      ═══════════════════════════════════════ -->
 <section class="founder">
   <div class="founder-inner">
-    <div class="fade-in">
+    <div>
       <blockquote>
         <p>"I built EARN because I was tired of referral roulette. I wanted a black book of the best agents in North America. This is that black book."</p>
         <footer class="founder-footer">
@@ -2332,10 +2099,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      ═══════════════════════════════════════ -->
 <footer class="footer-section">
   <div class="footer-border-top"></div>
-  <div class="footer-cta fade-in">
+  <div class="footer-cta fade-in-subtle">
     <h2>Acceptance is by Invitation or Nomination.</h2>
     <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Territory Access</button></div>
-    <p style="font-size:13px;color:#8a8a8a;letter-spacing:0.01em;margin-top:16px;">Application takes two minutes. Most approvals within 24 hours.</p>
   </div>
   <div class="footer-bottom-outer">
     <div class="footer-bottom">
@@ -2380,7 +2146,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── Fade-in on scroll (IntersectionObserver) ──
-const fadeEls = document.querySelectorAll('.fade-in');
+const fadeEls = document.querySelectorAll('.fade-in, .fade-in-subtle, .fade-in-scale, .fade-in-rise');
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -2691,12 +2457,19 @@ if (canvas) {
     const globe = document.getElementById('splineGlobe');
     globe.style.opacity = '1';
 
-    // Viewport-aware: hide canvas entirely when hero is not visible
+    // Viewport-aware: pause Spline when hero is not visible
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
+      let splinePlaying = true;
       const globeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          canvas.style.display = entry.isIntersecting ? 'block' : 'none';
+          if (entry.isIntersecting && !splinePlaying) {
+            if (app.play) app.play();
+            splinePlaying = true;
+          } else if (!entry.isIntersecting && splinePlaying) {
+            if (app.stop) app.stop();
+            splinePlaying = false;
+          }
         });
       }, { threshold: 0 });
       globeObserver.observe(heroSection);
