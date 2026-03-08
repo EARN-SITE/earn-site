@@ -1375,8 +1375,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 768px) { .membership-header { margin-bottom: 40px; } }
 .membership-header h2 {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 400;
+  letter-spacing: -0.03em;
   color: white;
 }
 .membership-header p {
@@ -1522,7 +1523,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .mc-headline {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -1643,7 +1644,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .footer-cta h2 {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 400;
   letter-spacing: -0.03em;
   color: white;
@@ -2437,7 +2438,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 <section class="membership">
   <div class="membership-header fade-in-rise">
     <span style="font-size:12px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:#787060;">Elite Members</span>
-    <h2 style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2.5rem,5vw,4.5rem);">The Standard.</h2>
+    <h2>The Standard.</h2>
     <p>Every territory holder in the network represents the highest tier of production and client service in their market.</p>
   </div>
 
@@ -2535,7 +2536,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 <footer class="footer-section">
   <div class="footer-border-top"></div>
   <div class="footer-cta fade-in-subtle">
-    <h2>Acceptance is by Invitation or Nomination.</h2>
+    <h2 style="text-wrap:balance;">Acceptance is by Invitation or Nomination.</h2>
     <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Territory Access</button></div>
   </div>
   <div class="footer-bottom-outer">
