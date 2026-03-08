@@ -1,0 +1,2919 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>EARN | Elite Agent Referral Network</title>
+<meta name="description" content="The definitive network for top-producing real estate agents. One agent. One territory. Strictly vetted by transaction volume.">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="EARN | Elite Agent Referral Network">
+<meta property="og:description" content="The definitive network for top-producing real estate agents. One agent. One territory. Strictly vetted by transaction volume.">
+<meta property="og:image" content="/images/og-image.png">
+<meta property="og:url" content="https://eliteagentreferralnetwork.com">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<!-- Fonts: Inter + Cormorant Garamond -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════
+   CSS VARIABLES (from globals.css)
+   ═══════════════════════════════════════ */
+:root {
+  --background: #050505;
+  --foreground: #fafafa;
+  --muted-foreground: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.1);
+  --gold: #918268;
+  --gold-light: #a89478;
+  --dark-gold: #87734e;
+  --bg-surface: #151515;
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d8;
+  --text-tertiary: #a1a1aa;
+  --text-body: #71717a;
+  --text-muted: #52525b;
+  --text-warm: #787060;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+
+/* ═══════════════════════════════════════
+   GLASS DESIGN SYSTEM (from globals.css)
+   ═══════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.glass-badge {
+  background: rgba(145, 130, 104, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(145, 130, 104, 0.2);
+  box-shadow: inset 0 1px 0 0 rgba(145, 130, 104, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ═══════════════════════════════════════
+   MARQUEE ANIMATION
+   ═══════════════════════════════════════ */
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .territory-carousel-track,
+  .members-track {
+    animation-play-state: paused;
+  }
+}
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ═══════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════ */
+.nav-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 55;
+  display: flex;
+  justify-content: center;
+  padding: 16px 16px 0;
+}
+.nav-pill {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(12, 12, 12, 0.5);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+}
+.nav-pill.scrolled {
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+.nav-left { display: flex; align-items: center; flex-shrink: 0; }
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #a1a1aa;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: white; }
+.nav-link.active { color: white; }
+.nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.nav-signin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #a1a1aa;
+  transition: color 0.2s;
+}
+.nav-signin:hover { color: white; }
+.nav-signin svg { transition: all 0.3s; }
+.nav-signin:hover svg { filter: drop-shadow(0 0 6px rgba(255,255,255,0.4)); }
+.fingerprint-icon .fp-stroke { transition: opacity 0.5s ease; }
+.fingerprint-icon .fp-fill {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.nav-signin:hover .fingerprint-icon .fp-stroke { opacity: 0; }
+.nav-signin:hover .fingerprint-icon .fp-fill { opacity: 1; }
+.nav-signin:hover .fp-fill.fp-r1 { transition-delay: 0s; }
+.nav-signin:hover .fp-fill.fp-r2 { transition-delay: 0.1s; }
+.nav-signin:hover .fp-fill.fp-r3 { transition-delay: 0.2s; }
+.nav-signin:hover .fp-fill.fp-r4 { transition-delay: 0.3s; }
+
+/* Hamburger (mobile) */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #d4d4d8;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+.nav-hamburger span:nth-child(1) { transform: translateY(-4px); }
+.nav-hamburger span:nth-child(2) { opacity: 1; }
+.nav-hamburger span:nth-child(3) { transform: translateY(4px); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(0) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+
+/* Mobile menu overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 45;
+  background: rgba(5, 5, 5, 0.97);
+  backdrop-filter: blur(40px) saturate(120%);
+  -webkit-backdrop-filter: blur(40px) saturate(120%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+.mobile-menu-link {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #d4d4d8;
+  padding: 16px 0;
+  transition: color 0.3s, transform 0.3s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+.mobile-menu.open .mobile-menu-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobile-menu.open .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.open .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.open .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu-link:hover { color: white; }
+
+/* Member Portal link in mobile menu */
+.mobile-menu-portal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  padding: 0;
+  transition: color 0.3s, transform 0.3s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+.mobile-menu.open .mobile-menu-portal {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+.mobile-menu-portal:hover { color: var(--gold-light); }
+.mobile-menu-portal svg { width: 18px; height: 18px; }
+
+/* Separator rule */
+.mobile-menu-rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(145, 130, 104, 0.3);
+  margin: 24px auto;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.mobile-menu.open .mobile-menu-rule {
+  opacity: 1;
+  transition-delay: 0.25s;
+}
+
+/* Action group below separator */
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding-top: 4px;
+}
+
+/* Request Access CTA in mobile menu */
+.mobile-menu-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu.open .mobile-menu-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.38s;
+}
+.mobile-menu-cta .shader-btn.lg {
+  padding: 14px 36px;
+}
+
+@media (max-width: 960px) {
+  .nav-center { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-right { gap: 12px; }
+  .nav-signin { display: none; }
+}
+@media (max-width: 768px) {
+  .nav-center { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-pill { padding: 10px 16px; }
+  .nav-right { gap: 10px; }
+}
+@media (max-width: 480px) {
+  .nav-left a img { height: 22px !important; }
+  .nav-right { gap: 8px; }
+  .nav-signin { display: none; }
+}
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 24px;
+}
+.hero-globe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 800px;
+  height: 800px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+.hero-globe canvas {
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+}
+.hero-globe-vignette {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle at center, transparent 15%, rgba(5,5,5,0.4) 30%, rgba(5,5,5,0.8) 45%, #050505 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* Aggressive bottom fade — kills the lower half of the globe */
+.hero-globe-fade-bottom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  background: linear-gradient(to bottom, transparent 30%, rgba(5,5,5,0.5) 42%, rgba(5,5,5,0.85) 50%, #050505 58%);
+  pointer-events: none;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .hero-globe { width: 600px; height: 600px; }
+  .hero-globe-vignette { width: 750px; height: 750px; }
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  max-width: 896px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero-content h1 {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(3.2rem, 6.5vw, 96px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  color: white;
+}
+.hero-content p {
+  max-width: 560px;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+/* ═══════════════════════════════════════
+   PROOF BAR
+   ═══════════════════════════════════════ */
+.proof-bar { padding: 80px 24px; }
+.proof-bar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.proof-stat {
+  flex-shrink: 0;
+  min-width: 140px;
+  text-align: center;
+}
+.proof-number {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: white;
+  font-variant-numeric: tabular-nums;
+}
+.proof-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-top: 4px;
+}
+.proof-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  align-self: stretch;
+}
+@media (max-width: 600px) {
+  .proof-bar-inner { gap: 32px 0; flex-direction: column; align-items: center; }
+  .proof-divider { width: 40px; height: 1px; align-self: center; }
+}
+
+/* ═══════════════════════════════════════
+   ANTI-PLATFORM (No Noise Section)
+   ═══════════════════════════════════════ */
+.anti-platform {
+  position: relative;
+  padding: 240px 24px;
+}
+@media (max-width: 768px) {
+  .anti-platform { padding: 140px 24px; }
+}
+.anti-platform-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+.anti-header {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+@media (max-width: 768px) { .anti-header { margin-bottom: 0; } }
+.anti-header h2 {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: white;
+  text-wrap: balance;
+}
+.anti-header p {
+  max-width: 672px;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+
+/* ═══════════════════════════════════════
+   UNFAIR ADVANTAGE (Phone + Notifications)
+   Photorealistic iPhone 15 Pro + iOS notifications
+   ═══════════════════════════════════════ */
+.unfair {
+  position: relative;
+  overflow: hidden;
+  padding: 128px 24px 160px;
+}
+.unfair::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(145,130,104,0.04) 0%, rgba(145,130,104,0.02) 35%, transparent 70%);
+  pointer-events: none;
+}
+@media (max-width: 768px) { .unfair { padding: 80px 24px 96px; } }
+.unfair-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* iPhone 15 Pro frame */
+.phone-wrap { display: flex; justify-content: center; }
+.phone-body {
+  position: relative;
+  width: 285px;
+  height: 582px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4))
+          drop-shadow(0 24px 60px rgba(0,0,0,0.5));
+}
+.phone-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background:
+    linear-gradient(165deg,
+      rgba(58,58,60,1) 0%,
+      rgba(44,44,46,1) 15%,
+      rgba(38,38,40,1) 40%,
+      rgba(28,28,30,1) 70%,
+      rgba(22,22,24,1) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,0.13),
+    inset 0 2px 0 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 0 rgba(255,255,255,0.04),
+    inset 1px 0 0 0 rgba(255,255,255,0.07),
+    inset -1px 0 0 0 rgba(255,255,255,0.07),
+    0 0 0 0.5px rgba(255,255,255,0.1),
+    0 1px 3px rgba(0,0,0,0.3),
+    0 8px 24px rgba(0,0,0,0.35),
+    0 24px 60px rgba(0,0,0,0.4);
+}
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  right: -1.5px;
+  top: 148px;
+  width: 3px;
+  height: 44px;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: 1px 0 0 0 rgba(255,255,255,0.06);
+}
+.phone-frame::after {
+  content: '';
+  position: absolute;
+  left: -1.5px;
+  top: 120px;
+  width: 3px;
+  height: 32px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+.phone-action-btn {
+  position: absolute;
+  left: -1.5px;
+  top: 87px;
+  width: 3px;
+  height: 22px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+.phone-vol2 {
+  position: absolute;
+  left: -1.5px;
+  top: 162px;
+  width: 3px;
+  height: 32px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+
+/* Screen */
+.phone-screen {
+  position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border-radius: 46px;
+  background: #000000;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.8);
+}
+.phone-wallpaper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/images/silk-black-wallpaper.webp');
+  background-size: cover;
+  background-position: center 20%;
+  filter: brightness(0.5);
+}
+.phone-screen::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.012) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Dynamic Island */
+.phone-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: 120px;
+  height: 36px;
+  border-radius: 20px;
+  background: #000000;
+  box-shadow: 0 0 0 0.5px rgba(0,0,0,1), inset 0 0 2px rgba(0,0,0,1);
+}
+.phone-island::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(30,30,40,1) 0%, rgba(15,15,20,1) 50%, rgba(8,8,12,1) 100%);
+  box-shadow: 0 0 0 1px rgba(40,40,50,0.6), inset 0 0 2px rgba(0,0,0,0.8);
+}
+
+.phone-screen-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.02) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 2s ease;
+  z-index: 1;
+}
+.phone-screen-glow.visible { opacity: 1; }
+
+/* iOS Status Bar */
+.ios-status-bar {
+  position: absolute;
+  top: 14px;
+  left: 36px;
+  right: 36px;
+  z-index: 40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+}
+.ios-status-time {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.02em;
+}
+.ios-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.ios-cellular {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 8px;
+}
+.ios-cellular-bar {
+  width: 2px;
+  border-radius: 0.5px;
+  background: rgba(255,255,255,0.8);
+}
+.ios-cellular-bar:nth-child(1) { height: 2.5px; }
+.ios-cellular-bar:nth-child(2) { height: 4px; }
+.ios-cellular-bar:nth-child(3) { height: 5.5px; }
+.ios-cellular-bar:nth-child(4) { height: 7px; opacity: 0.3; }
+.ios-battery {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.ios-battery-body {
+  width: 18px;
+  height: 8.5px;
+  border-radius: 2px;
+  border: 0.8px solid rgba(255,255,255,0.3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ios-battery-fill {
+  position: absolute;
+  top: 1.5px; left: 1.5px; bottom: 1.5px;
+  width: 60%;
+  border-radius: 0.8px;
+  background: rgba(255,255,255,0.8);
+}
+.ios-battery-pct {
+  position: relative;
+  z-index: 2;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 6px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  line-height: 1;
+}
+.ios-battery-cap {
+  width: 1px;
+  height: 3px;
+  border-radius: 0 0.8px 0.8px 0;
+  background: rgba(255,255,255,0.3);
+}
+
+/* Lock Screen Clock */
+.phone-time {
+  position: absolute;
+  top: 55px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.phone-time.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.phone-time .date {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-sans), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2px;
+}
+.phone-time .time {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-sans), system-ui, sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.95);
+  font-feature-settings: "tnum";
+}
+
+/* iOS Notifications */
+.phone-notifications {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  z-index: 20;
+  text-align: left;
+}
+.phone-notif {
+  border-radius: 14px;
+  padding: 10px 11px;
+  background:
+    linear-gradient(180deg,
+      rgba(58, 58, 60, 0.62) 0%,
+      rgba(42, 42, 44, 0.58) 100%
+    );
+  -webkit-backdrop-filter: blur(30px) saturate(160%) brightness(1.05);
+  backdrop-filter: blur(30px) saturate(160%) brightness(1.05);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255,255,255,0.1),
+    0 0 0 0.5px rgba(255,255,255,0.04),
+    0 2px 6px rgba(0,0,0,0.3),
+    0 6px 16px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-12px) scale(0.97);
+}
+@keyframes notifSlideIn {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  40% { opacity: 1; transform: translateY(2px) scale(1.005); }
+  65% { transform: translateY(-1px) scale(0.999); }
+  80% { transform: translateY(0.5px) scale(1.001); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.phone-notif.visible {
+  animation: notifSlideIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* App Icon */
+.notif-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.08),
+    0 1px 2px rgba(0,0,0,0.3);
+}
+.notif-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Notification Content */
+.notif-content {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+.notif-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1px;
+}
+.notif-app {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+.notif-time {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.28);
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+.notif-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.92);
+  text-align: left;
+}
+.notif-detail {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.42);
+  text-align: left;
+  margin-top: 1px;
+}
+
+/* Home Indicator */
+.phone-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.2);
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 1.2s 0.6s ease;
+}
+.phone-bar.visible { opacity: 1; }
+
+/* Lock Screen Shortcuts */
+.ios-lock-shortcuts {
+  position: absolute;
+  bottom: 20px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 25;
+  opacity: 0;
+  transition: opacity 1.5s 1s ease;
+}
+.ios-lock-shortcuts.visible { opacity: 1; }
+.ios-lock-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(50,50,52,0.5);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.ios-flashlight::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: 1.2px solid rgba(255,255,255,0.7);
+  border-radius: 1px 1px 2px 2px;
+  display: block;
+}
+.ios-camera::after {
+  content: '';
+  width: 11px;
+  height: 8px;
+  border: 1.2px solid rgba(255,255,255,0.7);
+  border-radius: 1.5px;
+  display: block;
+}
+
+/* Ambient Glow */
+.phone-glow {
+  position: absolute;
+  inset: -160px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(145,130,104,0.08) 0%,
+    rgba(145,130,104,0.04) 30%,
+    rgba(145,130,104,0.01) 55%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+.phone-glow.visible { opacity: 1; }
+
+/* Phone responsive */
+@media (max-width: 480px) {
+  .phone-body { width: 250px; height: 510px; }
+  .phone-frame { border-radius: 44px; }
+  .phone-screen { border-radius: 41px; }
+  .phone-island { width: 100px; height: 30px; top: 10px; }
+  .phone-time .time { font-size: 48px; }
+  .phone-time { top: 50px; }
+  .phone-notifications { top: 140px; gap: 6px; left: 8px; right: 8px; }
+  .notif-icon { width: 30px; height: 30px; border-radius: 7px; }
+  .phone-notif { padding: 9px; gap: 7px; border-radius: 12px; }
+  .notif-title { font-size: 11px; }
+  .notif-detail { font-size: 10px; }
+  .notif-app { font-size: 10px; }
+  .notif-time { font-size: 10px; }
+  .ios-lock-btn { width: 28px; height: 28px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .phone-notif.visible {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.3s ease;
+  }
+  .phone-time {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   VETTING TICKER (Brokerage Marquee)
+   ═══════════════════════════════════════ */
+.ticker {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 0 48px;
+  margin-top: -120px;
+  z-index: 2;
+}
+@media (max-width: 768px) { .ticker { margin-top: -60px; } }
+.ticker-border {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+}
+.ticker-border.top { top: 0; }
+.ticker-border.bottom { bottom: 0; }
+.ticker-label {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  padding: 0 24px;
+  text-align: center;
+}
+.ticker-label span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+@media (max-width: 480px) {
+  .ticker-label svg { display: none; }
+  .ticker-label span { font-size: 11px; }
+}
+.ticker-track-wrap {
+  position: relative;
+}
+.ticker-fade-l {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 128px;
+  background: linear-gradient(to right, #050505, transparent);
+  pointer-events: none;
+}
+.ticker-fade-r {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  width: 128px;
+  background: linear-gradient(to left, #050505, transparent);
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .ticker-fade-l, .ticker-fade-r { width: 48px; }
+}
+.ticker-scroll {
+  display: flex;
+  overflow: hidden;
+}
+.ticker-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 64px;
+  padding-right: 64px;
+}
+.ticker-track img {
+  height: 22px;
+  width: auto;
+  filter: grayscale(100%) brightness(0.75);
+  opacity: 0.6;
+}
+@media (max-width: 768px) {
+  .ticker-track { gap: 40px; padding-right: 40px; }
+  .ticker-track img { height: 18px; }
+}
+
+/* ═══════════════════════════════════════
+   TERRITORY MAP
+   ═══════════════════════════════════════ */
+.territory {
+  padding: 128px 24px;
+}
+@media (max-width: 768px) { .territory { padding: 80px 24px; } }
+.territory-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+.territory-header {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+@media (max-width: 768px) { .territory-header { margin-bottom: 40px; } }
+.territory-header h2 {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: white;
+}
+.territory-header p {
+  max-width: 672px;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+
+/* Simple territory grid instead of react-simple-maps (which needs React) */
+/* Pulsing dot for available */
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.pulse-dot.gold { background: var(--gold); }
+.pulse-dot.white { background: white; }
+.pulse-dot.white::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+  opacity: 0;
+}
+.pulse-dot.white.pulse-once::before {
+  animation: pulse-ring 2.5s ease-out 1 forwards;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.legend-dot.gold { background: var(--gold); }
+.legend-dot.white { background: white; }
+.legend-text {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+@media (max-width: 768px) {
+}
+/* ═══════════════════════════════════════
+   HOW IT WORKS
+   ═══════════════════════════════════════ */
+.how-it-works {
+  padding: 160px 24px 128px;
+}
+@media (max-width: 768px) { .how-it-works { padding: 80px 24px 80px; } }
+.how-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.how-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+@media (max-width: 768px) { .how-header { margin-bottom: 48px; } }
+.how-header h2 {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: white;
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(145,130,104,0.2);
+}
+@media (max-width: 768px) { .how-steps { grid-template-columns: 1fr; } }
+.how-step {
+  padding: 40px 32px;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+.how-step:last-child { border-right: none; }
+@media (max-width: 768px) {
+  .how-step {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding: 32px 0;
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-step h3 { min-height: auto; }
+}
+.how-number {
+  display: block;
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: rgba(145,130,104,0.35);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.how-step h3 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 12px;
+  line-height: 1.45;
+  min-height: 2.9em;
+}
+.how-step p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #71717a;
+}
+
+/* ═══════════════════════════════════════
+   TERRITORY CAROUSEL
+   ═══════════════════════════════════════ */
+.territory-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -24px;
+}
+.territory-carousel-fade-l,
+.territory-carousel-fade-r {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.territory-carousel-fade-l { left: 0; background: linear-gradient(to right, #050505, transparent); }
+.territory-carousel-fade-r { right: 0; background: linear-gradient(to left, #050505, transparent); }
+@media (max-width: 768px) {
+  .territory-carousel-fade-l, .territory-carousel-fade-r { width: 48px; }
+}
+.territory-carousel-scroll {
+  overflow: hidden;
+}
+.territory-carousel-scroll:hover .territory-carousel-track {
+  animation-play-state: paused;
+}
+.territory-carousel-track {
+  display: flex;
+  gap: 20px;
+  animation: marquee 80s linear infinite;
+  will-change: transform;
+  width: max-content;
+}
+.territory-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 280px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.3s;
+}
+.territory-card:hover {
+  border-color: rgba(255,255,255,0.18);
+}
+.territory-card.claimed {
+  border-color: rgba(145,130,104,0.25);
+}
+.territory-card.available:hover {
+  border-color: rgba(255,255,255,0.2);
+}
+.territory-card-img {
+  position: absolute;
+  inset: 0;
+  background: #151515;
+  background-size: cover;
+  background-position: center;
+}
+.territory-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.85) 100%);
+}
+.territory-card.claimed .territory-card-overlay {
+  background: linear-gradient(180deg, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.9) 100%);
+}
+.territory-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 20px;
+}
+.territory-card-city {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: white;
+  line-height: 1.2;
+}
+.territory-card.claimed .territory-card-city {
+  color: rgba(255,255,255,0.5);
+}
+.territory-card-area {
+  font-size: 12px;
+  color: #a1a1aa;
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+.territory-card.claimed .territory-card-area {
+  color: #71717a;
+}
+.territory-card-status {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.territory-card-status.claimed { color: var(--gold); }
+.territory-card-status.available { color: rgba(255,255,255,0.6); }
+
+/* ═══════════════════════════════════════
+   MEMBERSHIP (Agent Carousel)
+   ═══════════════════════════════════════ */
+.membership {
+  padding: 128px 0;
+}
+@media (max-width: 768px) { .membership { padding: 80px 0; } }
+.membership-header {
+  max-width: 1152px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+@media (max-width: 768px) { .membership-header { margin-bottom: 40px; } }
+.membership-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: white;
+}
+.membership-header p {
+  max-width: 672px;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+
+.members-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.members-fade-l, .members-fade-r {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 128px;
+  pointer-events: none;
+}
+.members-fade-l { left: 0; background: linear-gradient(to right, #050505, transparent); }
+.members-fade-r { right: 0; background: linear-gradient(to left, #050505, transparent); }
+@media (max-width: 768px) {
+  .members-fade-l, .members-fade-r { width: 48px; }
+}
+
+.members-scroll {
+  display: flex;
+  overflow: hidden;
+}
+.members-scroll:hover .members-track { animation-play-state: paused; }
+.members-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 24px;
+  padding-right: 24px;
+  animation: marquee 70s linear infinite reverse;
+}
+
+.member-card {
+  display: flex;
+  width: 300px;
+  flex-shrink: 0;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.member-photo {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .member-photo { height: 280px; } }
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(100%);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.member-card:hover .member-photo img {
+  filter: grayscale(0%);
+}
+.member-info-wrap {
+  padding: 20px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: white;
+}
+.member-territory {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+.member-volume {
+  display: inline-block;
+  margin-top: 12px;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  width: fit-content;
+}
+
+/* ═══════════════════════════════════════
+   ATMOSPHERIC DIVIDER — now integrated
+   into member credential section
+   ═══════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   MEMBER CREDENTIAL
+   ═══════════════════════════════════════ */
+.member-credential {
+  position: relative;
+  padding: 180px 24px 160px;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .member-credential { padding: 100px 24px 80px; } }
+.member-credential-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url(/images/atmo-obsidian.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+}
+.member-credential-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to bottom, #050505 15%, rgba(5,5,5,0.6) 45%, transparent);
+  z-index: 1;
+}
+.member-credential-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to top, #050505 15%, rgba(5,5,5,0.6) 45%, transparent);
+  z-index: 1;
+}
+.mc-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.mc-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+.mc-seal {
+  margin-top: -20px;
+  margin-bottom: 40px;
+}
+.mc-seal svg {
+  display: block;
+  margin: 0 auto;
+}
+.mc-statement {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+/* ═══════════════════════════════════════
+   FOUNDER NOTE
+   ═══════════════════════════════════════ */
+.founder {
+  padding: 200px 24px 200px;
+}
+@media (max-width: 768px) { .founder { padding: 120px 24px 120px; } }
+.founder-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.founder blockquote {
+  text-align: center;
+}
+.founder blockquote p {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  line-height: 1.55;
+  font-weight: 300;
+  font-style: italic;
+  color: #d4d4d8;
+  letter-spacing: -0.01em;
+}
+.founder-footer {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.founder-divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(145,130,104,0.3);
+  margin-bottom: 24px;
+}
+.founder-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(145,130,104,0.3);
+  margin-bottom: 16px;
+}
+.founder-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.founder-name {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.125rem;
+  color: white;
+  letter-spacing: 0.02em;
+}
+.founder-title {
+  margin-top: 4px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+.founder-team-link {
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.founder-team-link:hover {
+  color: var(--gold-light);
+}
+
+/* ═══════════════════════════════════════
+   FOOTER SECTION
+   ═══════════════════════════════════════ */
+.footer-section {
+  position: relative;
+  padding: 160px 0 0;
+}
+@media (max-width: 767px) { .footer-section { padding-top: 120px; } }
+.footer-border-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+}
+.footer-cta {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.footer-cta h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: white;
+  margin-bottom: 32px;
+}
+.footer-cta .shader-btn-wrap { margin-bottom: 0; }
+
+.footer-bottom-outer {
+  margin-top: 160px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+@media (max-width: 767px) { .footer-bottom-outer { margin-top: 100px; } }
+.footer-bottom {
+  margin: 0 auto;
+  padding: 64px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .footer-bottom {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    padding: 64px 10vw;
+  }
+}
+@media (min-width: 1400px) { .footer-bottom { padding: 64px 14vw; } }
+@media (min-width: 1800px) { .footer-bottom { padding: 64px 18vw; } }
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+@media (min-width: 768px) { .footer-left { text-align: left; } }
+.footer-left p { font-size: 13px; line-height: 1.7; color: #52525b; }
+.footer-left a { font-size: 13px; color: var(--gold); transition: color 0.2s; }
+.footer-left a:hover { color: var(--gold-light); }
+.footer-center { display: flex; justify-content: center; }
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+@media (min-width: 768px) { .footer-right { align-items: flex-end; } }
+.footer-right a { font-size: 13px; color: #52525b; transition: color 0.2s; }
+.footer-right a:hover { color: #d4d4d8; }
+
+/* ═══════════════════════════════════════
+   FADE-IN ANIMATION UTILITY
+   ═══════════════════════════════════════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pure materialization — no movement, just appears */
+.fade-in-subtle {
+  opacity: 0;
+  transition: opacity 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-subtle.visible {
+  opacity: 1;
+}
+
+/* Prestige emerge — slight scale with slow reveal */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 3.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 3.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Heavy rise — deeper, slower, deliberate */
+.fade-in-rise {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 2.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.fade-in-rise.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   SVG ICONS INLINE
+   ═══════════════════════════════════════ */
+.icon { width: 20px; height: 20px; flex-shrink: 0; }
+/* ═══════════════════════════════════════
+   SHADER BUTTON
+   ═══════════════════════════════════════ */
+.shader-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.shader-btn-wrap canvas {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+}
+.shader-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(8, 8, 8, 0.92);
+  color: white;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.shader-btn:hover { background: rgba(18, 18, 18, 0.95); }
+.shader-btn.lg { padding: 16px 40px; font-size: 14px; }
+.shader-btn.sm { padding: 10px 24px; font-size: 13px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════ -->
+<nav class="nav-outer" id="navOuter">
+  <div class="nav-pill" id="navPill">
+    <div class="nav-left">
+      <a href="/" style="flex-shrink:0;">
+        <img src="/images/earn-logo.png" alt="EARN" style="height:28px;width:auto;">
+      </a>
+    </div>
+    <div class="nav-center">
+      <a href="/team" class="nav-link">Team</a>
+      <a href="/faqs" class="nav-link">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://app.eliteagentreferralnetwork.com/signin" class="nav-signin">
+        <svg class="fingerprint-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+          <!-- Grey base (always visible) -->
+          <g class="fp-stroke" fill="#71717a">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.25C5.28921 2.25 2.25 5.28921 2.25 9C2.25 9.41421 1.91421 9.75 1.5 9.75C1.08579 9.75 0.75 9.41421 0.75 9C0.75 4.46079 4.46079 0.75 9 0.75C10.2808 0.75 11.544 1.0482 12.6895 1.62098C13.8351 2.19375 14.8315 3.02538 15.6 4.05C15.8485 4.38137 15.7814 4.85147 15.45 5.1C15.1186 5.34853 14.6485 5.28137 14.4 4.95C13.7713 4.11168 12.956 3.43125 12.0187 2.96262C11.0814 2.49398 10.0479 2.25 9 2.25Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00227 6.79192C5.39332 6.92848 5.59963 7.3562 5.46307 7.74725C5.32495 8.1428 5.25001 8.56182 5.25001 8.99999C5.25001 11.3103 4.86773 13.6435 4.46152 14.8622C4.33053 15.2551 3.90579 15.4675 3.51283 15.3365C3.11988 15.2055 2.90751 14.7808 3.03849 14.3878C3.38228 13.3565 3.75001 11.1897 3.75001 8.99999C3.75001 8.38816 3.85507 7.80218 4.04694 7.25273C4.1835 6.86167 4.61121 6.65536 5.00227 6.79192Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4151 12.7535C13.8274 12.7936 14.1291 13.1603 14.089 13.5726C14.0323 14.1551 13.7924 15.4649 13.7029 15.9121C13.6217 16.3182 13.2266 16.5817 12.8204 16.5004C12.4142 16.4192 12.1508 16.0241 12.2321 15.6179C12.3226 15.1651 12.5477 13.9248 12.596 13.4274C12.6361 13.0151 13.0028 12.7134 13.4151 12.7535Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.409 7.40901C7.83096 6.98705 8.40326 6.75 8.99999 6.75C9.41421 6.75 9.74999 7.08579 9.74999 7.5C9.74999 7.91421 9.41421 8.25 8.99999 8.25C8.80108 8.25 8.61032 8.32902 8.46966 8.46967C8.32901 8.61032 8.24999 8.80109 8.24999 9C8.24999 9.80241 8.17214 10.9493 8.05071 12.0801C8.00648 12.4919 7.63676 12.7899 7.22492 12.7457C6.81307 12.7015 6.51506 12.3318 6.55928 11.9199C6.67785 10.8157 6.74999 9.72759 6.74999 9C6.74999 8.40326 6.98705 7.83097 7.409 7.40901Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.04535 14.2614C7.45326 14.3334 7.72558 14.7224 7.65359 15.1303C7.57063 15.6005 7.41794 16.0665 7.28605 16.4691C7.25674 16.5586 7.22846 16.6449 7.2022 16.7274C7.07661 17.1221 6.65482 17.3403 6.2601 17.2147C5.86539 17.0891 5.64722 16.6673 5.77281 16.2726C5.80737 16.164 5.84126 16.0601 5.874 15.9597C6.00284 15.5648 6.11375 15.2248 6.17642 14.8697C6.2484 14.4618 6.63743 14.1894 7.04535 14.2614Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 9.09C10.9142 9.09 11.25 9.42578 11.25 9.84V9.84866C11.25 10.7378 11.25 11.9578 11.154 13.1943C11.0586 14.4229 10.8645 15.7333 10.4464 16.7785C10.2925 17.1631 9.85605 17.3502 9.47146 17.1964C9.08687 17.0425 8.89981 16.606 9.05364 16.2215C9.38554 15.3917 9.56639 14.2646 9.6585 13.0782C9.74969 11.9037 9.75 10.7351 9.75 9.84C9.75 9.42578 10.0858 9.09 10.5 9.09Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 12C0.75 11.5858 1.08579 11.25 1.5 11.25H1.5075C1.92171 11.25 2.2575 11.5858 2.2575 12C2.2575 12.4142 1.92171 12.75 1.5075 12.75H1.5C1.08579 12.75 0.75 12.4142 0.75 12Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.2009 6.76496C16.6069 6.68263 17.0027 6.94499 17.085 7.35094C17.1225 7.53583 17.1456 7.83904 17.1616 8.15923C17.1786 8.4994 17.1898 8.91699 17.1931 9.36365C17.1996 10.2518 17.1751 11.286 17.0963 12.0746C17.0551 12.4868 16.6875 12.7875 16.2754 12.7463C15.8632 12.7051 15.5625 12.3375 15.6037 11.9254C15.6749 11.214 15.6995 10.2405 15.6931 9.37471C15.6899 8.94443 15.6792 8.54856 15.6635 8.23393C15.6468 7.89932 15.6266 7.70641 15.615 7.64905C15.5326 7.2431 15.795 6.84728 16.2009 6.76496Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0006 5.2471C8.34214 5.247 7.69525 5.42027 7.125 5.74951C6.76628 5.95661 6.30759 5.83371 6.10048 5.47499C5.89338 5.11627 6.01628 4.65757 6.375 4.45047C7.17335 3.98954 8.07899 3.74695 9.00084 3.7471C9.9227 3.74725 10.8283 3.99013 11.6265 4.45131C12.4247 4.91249 13.0874 5.57572 13.5479 6.37429C14.0084 7.17286 14.2506 8.07861 14.25 9.00047L13.5 8.99999H14.25V9.00047V9.00118C14.25 9.35418 14.25 9.8865 14.2348 10.5181C14.2248 10.9321 13.881 11.2597 13.4669 11.2498C13.0528 11.2398 12.7252 10.896 12.7352 10.4819C12.75 9.86919 12.75 9.352 12.75 8.99999V8.99951C12.7504 8.34104 12.5775 7.69407 12.2485 7.12366C11.9195 6.55326 11.4462 6.07952 10.876 5.75011C10.3059 5.42069 9.65907 5.24721 9.0006 5.2471Z"/>
+          </g>
+          <!-- White hover overlay — staggered radial reveal -->
+          <g class="fp-fill fp-r1" fill="white">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.409 7.40901C7.83096 6.98705 8.40326 6.75 8.99999 6.75C9.41421 6.75 9.74999 7.08579 9.74999 7.5C9.74999 7.91421 9.41421 8.25 8.99999 8.25C8.80108 8.25 8.61032 8.32902 8.46966 8.46967C8.32901 8.61032 8.24999 8.80109 8.24999 9C8.24999 9.80241 8.17214 10.9493 8.05071 12.0801C8.00648 12.4919 7.63676 12.7899 7.22492 12.7457C6.81307 12.7015 6.51506 12.3318 6.55928 11.9199C6.67785 10.8157 6.74999 9.72759 6.74999 9C6.74999 8.40326 6.98705 7.83097 7.409 7.40901Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 9.09C10.9142 9.09 11.25 9.42578 11.25 9.84V9.84866C11.25 10.7378 11.25 11.9578 11.154 13.1943C11.0586 14.4229 10.8645 15.7333 10.4464 16.7785C10.2925 17.1631 9.85605 17.3502 9.47146 17.1964C9.08687 17.0425 8.89981 16.606 9.05364 16.2215C9.38554 15.3917 9.56639 14.2646 9.6585 13.0782C9.74969 11.9037 9.75 10.7351 9.75 9.84C9.75 9.42578 10.0858 9.09 10.5 9.09Z"/>
+          </g>
+          <g class="fp-fill fp-r2" fill="white">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0006 5.2471C8.34214 5.247 7.69525 5.42027 7.125 5.74951C6.76628 5.95661 6.30759 5.83371 6.10048 5.47499C5.89338 5.11627 6.01628 4.65757 6.375 4.45047C7.17335 3.98954 8.07899 3.74695 9.00084 3.7471C9.9227 3.74725 10.8283 3.99013 11.6265 4.45131C12.4247 4.91249 13.0874 5.57572 13.5479 6.37429C14.0084 7.17286 14.2506 8.07861 14.25 9.00047L13.5 8.99999H14.25V9.00047V9.00118C14.25 9.35418 14.25 9.8865 14.2348 10.5181C14.2248 10.9321 13.881 11.2597 13.4669 11.2498C13.0528 11.2398 12.7252 10.896 12.7352 10.4819C12.75 9.86919 12.75 9.352 12.75 8.99999V8.99951C12.7504 8.34104 12.5775 7.69407 12.2485 7.12366C11.9195 6.55326 11.4462 6.07952 10.876 5.75011C10.3059 5.42069 9.65907 5.24721 9.0006 5.2471Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4151 12.7535C13.8274 12.7936 14.1291 13.1603 14.089 13.5726C14.0323 14.1551 13.7924 15.4649 13.7029 15.9121C13.6217 16.3182 13.2266 16.5817 12.8204 16.5004C12.4142 16.4192 12.1508 16.0241 12.2321 15.6179C12.3226 15.1651 12.5477 13.9248 12.596 13.4274C12.6361 13.0151 13.0028 12.7134 13.4151 12.7535Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.04535 14.2614C7.45326 14.3334 7.72558 14.7224 7.65359 15.1303C7.57063 15.6005 7.41794 16.0665 7.28605 16.4691C7.25674 16.5586 7.22846 16.6449 7.2022 16.7274C7.07661 17.1221 6.65482 17.3403 6.2601 17.2147C5.86539 17.0891 5.64722 16.6673 5.77281 16.2726C5.80737 16.164 5.84126 16.0601 5.874 15.9597C6.00284 15.5648 6.11375 15.2248 6.17642 14.8697C6.2484 14.4618 6.63743 14.1894 7.04535 14.2614Z"/>
+          </g>
+          <g class="fp-fill fp-r3" fill="white">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00227 6.79192C5.39332 6.92848 5.59963 7.3562 5.46307 7.74725C5.32495 8.1428 5.25001 8.56182 5.25001 8.99999C5.25001 11.3103 4.86773 13.6435 4.46152 14.8622C4.33053 15.2551 3.90579 15.4675 3.51283 15.3365C3.11988 15.2055 2.90751 14.7808 3.03849 14.3878C3.38228 13.3565 3.75001 11.1897 3.75001 8.99999C3.75001 8.38816 3.85507 7.80218 4.04694 7.25273C4.1835 6.86167 4.61121 6.65536 5.00227 6.79192Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.2009 6.76496C16.6069 6.68263 17.0027 6.94499 17.085 7.35094C17.1225 7.53583 17.1456 7.83904 17.1616 8.15923C17.1786 8.4994 17.1898 8.91699 17.1931 9.36365C17.1996 10.2518 17.1751 11.286 17.0963 12.0746C17.0551 12.4868 16.6875 12.7875 16.2754 12.7463C15.8632 12.7051 15.5625 12.3375 15.6037 11.9254C15.6749 11.214 15.6995 10.2405 15.6931 9.37471C15.6899 8.94443 15.6792 8.54856 15.6635 8.23393C15.6468 7.89932 15.6266 7.70641 15.615 7.64905C15.5326 7.2431 15.795 6.84728 16.2009 6.76496Z"/>
+          </g>
+          <g class="fp-fill fp-r4" fill="white">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.25C5.28921 2.25 2.25 5.28921 2.25 9C2.25 9.41421 1.91421 9.75 1.5 9.75C1.08579 9.75 0.75 9.41421 0.75 9C0.75 4.46079 4.46079 0.75 9 0.75C10.2808 0.75 11.544 1.0482 12.6895 1.62098C13.8351 2.19375 14.8315 3.02538 15.6 4.05C15.8485 4.38137 15.7814 4.85147 15.45 5.1C15.1186 5.34853 14.6485 5.28137 14.4 4.95C13.7713 4.11168 12.956 3.43125 12.0187 2.96262C11.0814 2.49398 10.0479 2.25 9 2.25Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 12C0.75 11.5858 1.08579 11.25 1.5 11.25H1.5075C1.92171 11.25 2.2575 11.5858 2.2575 12C2.2575 12.4142 1.92171 12.75 1.5075 12.75H1.5C1.08579 12.75 0.75 12.4142 0.75 12Z"/>
+          </g>
+        </svg>
+        <span>Member Portal</span>
+      </a>
+      <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn sm" onclick="window.location.href='/application'">Request Access</button></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="/team" class="mobile-menu-link">Team</a>
+    <a href="/faqs" class="mobile-menu-link">FAQ</a>
+    <a href="/application" class="mobile-menu-link">Apply</a>
+    <div class="mobile-menu-rule"></div>
+    <div class="mobile-menu-actions">
+      <a href="https://app.eliteagentreferralnetwork.com/signin" class="mobile-menu-portal">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#918268">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.25C5.28921 2.25 2.25 5.28921 2.25 9C2.25 9.41421 1.91421 9.75 1.5 9.75C1.08579 9.75 0.75 9.41421 0.75 9C0.75 4.46079 4.46079 0.75 9 0.75C10.2808 0.75 11.544 1.0482 12.6895 1.62098C13.8351 2.19375 14.8315 3.02538 15.6 4.05C15.8485 4.38137 15.7814 4.85147 15.45 5.1C15.1186 5.34853 14.6485 5.28137 14.4 4.95C13.7713 4.11168 12.956 3.43125 12.0187 2.96262C11.0814 2.49398 10.0479 2.25 9 2.25Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00227 6.79192C5.39332 6.92848 5.59963 7.3562 5.46307 7.74725C5.32495 8.1428 5.25001 8.56182 5.25001 8.99999C5.25001 11.3103 4.86773 13.6435 4.46152 14.8622C4.33053 15.2551 3.90579 15.4675 3.51283 15.3365C3.11988 15.2055 2.90751 14.7808 3.03849 14.3878C3.38228 13.3565 3.75001 11.1897 3.75001 8.99999C3.75001 8.38816 3.85507 7.80218 4.04694 7.25273C4.1835 6.86167 4.61121 6.65536 5.00227 6.79192Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.409 7.40901C7.83096 6.98705 8.40326 6.75 8.99999 6.75C9.41421 6.75 9.74999 7.08579 9.74999 7.5C9.74999 7.91421 9.41421 8.25 8.99999 8.25C8.80108 8.25 8.61032 8.32902 8.46966 8.46967C8.32901 8.61032 8.24999 8.80109 8.24999 9C8.24999 9.80241 8.17214 10.9493 8.05071 12.0801C8.00648 12.4919 7.63676 12.7899 7.22492 12.7457C6.81307 12.7015 6.51506 12.3318 6.55928 11.9199C6.67785 10.8157 6.74999 9.72759 6.74999 9C6.74999 8.40326 6.98705 7.83097 7.409 7.40901Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0006 5.2471C8.34214 5.247 7.69525 5.42027 7.125 5.74951C6.76628 5.95661 6.30759 5.83371 6.10048 5.47499C5.89338 5.11627 6.01628 4.65757 6.375 4.45047C7.17335 3.98954 8.07899 3.74695 9.00084 3.7471C9.9227 3.74725 10.8283 3.99013 11.6265 4.45131C12.4247 4.91249 13.0874 5.57572 13.5479 6.37429C14.0084 7.17286 14.2506 8.07861 14.25 9.00047L13.5 8.99999H14.25V9.00047V9.00118C14.25 9.35418 14.25 9.8865 14.2348 10.5181C14.2248 10.9321 13.881 11.2597 13.4669 11.2498C13.0528 11.2398 12.7252 10.896 12.7352 10.4819C12.75 9.86919 12.75 9.352 12.75 8.99999V8.99951C12.7504 8.34104 12.5775 7.69407 12.2485 7.12366C11.9195 6.55326 11.4462 6.07952 10.876 5.75011C10.3059 5.42069 9.65907 5.24721 9.0006 5.2471Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 9.09C10.9142 9.09 11.25 9.42578 11.25 9.84V9.84866C11.25 10.7378 11.25 11.9578 11.154 13.1943C11.0586 14.4229 10.8645 15.7333 10.4464 16.7785C10.2925 17.1631 9.85605 17.3502 9.47146 17.1964C9.08687 17.0425 8.89981 16.606 9.05364 16.2215C9.38554 15.3917 9.56639 14.2646 9.6585 13.0782C9.74969 11.9037 9.75 10.7351 9.75 9.84C9.75 9.42578 10.0858 9.09 10.5 9.09Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4151 12.7535C13.8274 12.7936 14.1291 13.1603 14.089 13.5726C14.0323 14.1551 13.7924 15.4649 13.7029 15.9121C13.6217 16.3182 13.2266 16.5817 12.8204 16.5004C12.4142 16.4192 12.1508 16.0241 12.2321 15.6179C12.3226 15.1651 12.5477 13.9248 12.596 13.4274C12.6361 13.0151 13.0028 12.7134 13.4151 12.7535Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.04535 14.2614C7.45326 14.3334 7.72558 14.7224 7.65359 15.1303C7.57063 15.6005 7.41794 16.0665 7.28605 16.4691C7.25674 16.5586 7.22846 16.6449 7.2022 16.7274C7.07661 17.1221 6.65482 17.3403 6.2601 17.2147C5.86539 17.0891 5.64722 16.6673 5.77281 16.2726C5.80737 16.164 5.84126 16.0601 5.874 15.9597C6.00284 15.5648 6.11375 15.2248 6.17642 14.8697C6.2484 14.4618 6.63743 14.1894 7.04535 14.2614Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.2009 6.76496C16.6069 6.68263 17.0027 6.94499 17.085 7.35094C17.1225 7.53583 17.1456 7.83904 17.1616 8.15923C17.1786 8.4994 17.1898 8.91699 17.1931 9.36365C17.1996 10.2518 17.1751 11.286 17.0963 12.0746C17.0551 12.4868 16.6875 12.7875 16.2754 12.7463C15.8632 12.7051 15.5625 12.3375 15.6037 11.9254C15.6749 11.214 15.6995 10.2405 15.6931 9.37471C15.6899 8.94443 15.6792 8.54856 15.6635 8.23393C15.6468 7.89932 15.6266 7.70641 15.615 7.64905C15.5326 7.2431 15.795 6.84728 16.2009 6.76496Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.75 12C0.75 11.5858 1.08579 11.25 1.5 11.25H1.5075C1.92171 11.25 2.2575 11.5858 2.2575 12C2.2575 12.4142 1.92171 12.75 1.5075 12.75H1.5C1.08579 12.75 0.75 12.4142 0.75 12Z"/>
+          </g>
+        </svg>
+        <span>Member Portal</span>
+      </a>
+      <div class="mobile-menu-cta">
+        <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Access</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<section class="hero">
+  <!-- Spline Globe -->
+  <div class="hero-globe" id="splineGlobe">
+    <canvas id="splineCanvas"></canvas>
+  </div>
+  <div class="hero-globe-vignette"></div>
+  <div class="hero-globe-fade-bottom"></div>
+
+  <div class="hero-content">
+    <span style="display:block;font-family:'Inter',sans-serif;font-size:clamp(12px, 2.5vw, 18px);font-weight:400;letter-spacing:clamp(0.12em, 1.5vw, 0.25em);text-transform:uppercase;color:#787060;margin-bottom:20px;">Elite Agent Referral Network</span>
+    <h1 style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;font-style:normal;letter-spacing:-0.05em;">
+      <span style="display:block;">The Definitive Network</span>
+      <span style="display:block;">for Top Producers</span>
+    </h1>
+    <p style="color:#a1a1aa;margin-top:16px;letter-spacing:0.02em;">One agent per market. Invitation only.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     VETTING TICKER (Brokerage Marquee)
+     ═══════════════════════════════════════ -->
+<section class="ticker">
+  <div class="ticker-border top"></div>
+
+  <div class="ticker-label fade-in">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#918268" stroke-width="1.5" style="width:16px;height:16px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span>Top 1% Agents from Major and Boutique Brokerages</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#918268" stroke-width="1.5" style="width:16px;height:16px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  </div>
+
+  <div class="ticker-track-wrap">
+    <div class="ticker-fade-l"></div>
+    <div class="ticker-fade-r"></div>
+    <div class="ticker-scroll">
+      <div class="ticker-track animate-marquee">
+        <img src="/images/brokerages/sothebys.svg" alt="Sotheby's International Realty">
+        <img src="/images/brokerages/christies.svg" alt="Christie's International Real Estate">
+        <img src="/images/brokerages/douglas-elliman.svg" alt="Douglas Elliman">
+        <img src="/images/brokerages/compass.svg" alt="Compass">
+        <img src="/images/brokerages/coldwell-banker.svg" alt="Coldwell Banker">
+        <img src="/images/brokerages/berkshire-hathaway.svg" alt="Berkshire Hathaway HomeServices">
+        <img src="/images/brokerages/engels-and-volkers.svg" alt="Engel &amp; Völkers">
+        <img src="/images/brokerages/remax.svg" alt="RE/MAX">
+        <img src="/images/brokerages/keller-williams.svg" alt="Keller Williams">
+        <img src="/images/brokerages/royal-lepage.svg" alt="Royal LePage">
+        <img src="/images/brokerages/nest-seekers.svg" alt="Nest Seekers International">
+        <img src="/images/brokerages/the-agency.svg" alt="The Agency">
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <img src="/images/brokerages/sothebys.svg" alt="Sotheby's International Realty">
+        <img src="/images/brokerages/christies.svg" alt="Christie's International Real Estate">
+        <img src="/images/brokerages/douglas-elliman.svg" alt="Douglas Elliman">
+        <img src="/images/brokerages/compass.svg" alt="Compass">
+        <img src="/images/brokerages/coldwell-banker.svg" alt="Coldwell Banker">
+        <img src="/images/brokerages/berkshire-hathaway.svg" alt="Berkshire Hathaway HomeServices">
+        <img src="/images/brokerages/engels-and-volkers.svg" alt="Engel &amp; Völkers">
+        <img src="/images/brokerages/remax.svg" alt="RE/MAX">
+        <img src="/images/brokerages/keller-williams.svg" alt="Keller Williams">
+        <img src="/images/brokerages/royal-lepage.svg" alt="Royal LePage">
+        <img src="/images/brokerages/nest-seekers.svg" alt="Nest Seekers International">
+        <img src="/images/brokerages/the-agency.svg" alt="The Agency">
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker-border bottom"></div>
+</section>
+
+
+
+
+<!-- ═══════════════════════════════════════
+     PROOF BAR (Stats Strip)
+     ═══════════════════════════════════════ -->
+<section class="proof-bar">
+  <div class="proof-bar-inner">
+    <div class="proof-stat">
+      <div class="proof-number fade-in counter" data-target="2500" data-suffix="+" data-duration="2000">0</div>
+      <div class="proof-label fade-in">Territories</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat">
+      <div class="proof-number fade-in" style="transition-delay:0.3s;">1 Agent</div>
+      <div class="proof-label fade-in" style="transition-delay:0.3s;">Per Territory</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat">
+      <div class="proof-number fade-in counter" data-target="100" data-suffix="%" data-duration="1800">0</div>
+      <div class="proof-label fade-in">Commission Retained</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     UNFAIR ADVANTAGE (Phone + Notifications)
+     ═══════════════════════════════════════ -->
+<section class="unfair" id="unfairSection">
+  <div class="unfair-inner">
+    <h2 class="fade-in" style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:64px;color:#fff;text-wrap:balance;">EARN members don't chase leads. Client referrals are routed to them.</h2>
+    <div style="display:flex;justify-content:center;">
+      <div class="fade-in" style="transition-delay:0.2s;">
+        <div class="phone-wrap">
+          <div class="phone-body" id="phoneMock">
+
+            <div class="phone-frame"></div>
+            <div class="phone-action-btn"></div>
+            <div class="phone-vol2"></div>
+            <div class="phone-island"></div>
+
+            <div class="phone-screen">
+              <div class="phone-screen-glow" id="phoneGlow"></div>
+              <div class="phone-wallpaper"></div>
+
+              <div class="ios-status-bar">
+                <span class="ios-status-time">9:41</span>
+                <div class="ios-status-icons">
+                  <div class="ios-cellular">
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                  </div>
+                  <div class="ios-battery">
+                    <div class="ios-battery-body">
+                      <div class="ios-battery-fill"></div>
+                      <span class="ios-battery-pct">80</span>
+                    </div>
+                    <div class="ios-battery-cap"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="phone-time" id="phoneTime">
+                <span class="date">Thursday, February 13</span>
+                <span class="time">9:41</span>
+              </div>
+
+              <div class="phone-notifications">
+
+                <div class="phone-notif" id="notif0">
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge0" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig0" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic0"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic0)">
+                        <rect width="60" height="60" fill="url(#ib0)"/>
+                        <rect width="60" height="60" fill="url(#ig0)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo0)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge0)">E</text>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">now</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $3.2M Buyer</div>
+                    <div class="notif-detail">Origin: Beverly Hills, CA · Pending</div>
+                  </div>
+                </div>
+
+                <div class="phone-notif" id="notif1">
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge1" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig1" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic1"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic1)">
+                        <rect width="60" height="60" fill="url(#ib1)"/>
+                        <rect width="60" height="60" fill="url(#ig1)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo1)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge1)">E</text>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">3m ago</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $1.6M Seller</div>
+                    <div class="notif-detail">Origin: Chicago, IL · Pending</div>
+                  </div>
+                </div>
+
+                <div class="phone-notif" id="notif2">
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge2" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig2" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic2"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic2)">
+                        <rect width="60" height="60" fill="url(#ib2)"/>
+                        <rect width="60" height="60" fill="url(#ig2)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo2)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge2)">E</text>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">6m ago</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $1.1M Buyer</div>
+                    <div class="notif-detail">Origin: Toronto, ON · Pending</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="ios-lock-shortcuts" id="lockShortcuts">
+                <div class="ios-lock-btn ios-flashlight"></div>
+                <div class="ios-lock-btn ios-camera"></div>
+              </div>
+              <div class="phone-bar" id="phoneBar"></div>
+            </div>
+
+            <div class="phone-glow" id="phoneAmbient"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════ -->
+<section class="how-it-works">
+  <div class="how-inner">
+    <div class="how-header fade-in">
+      <h2>Three Steps. Zero Complexity.</h2>
+    </div>
+    <div class="how-steps fade-in" style="transition-delay:0.15s;">
+      <div class="how-step">
+        <span class="how-number">01</span>
+        <h3>A Member Has a Client Relocating</h3>
+        <p>When a member’s client is buying or selling in another territory, the referral is submitted through EARN. A warm introduction from a vetted peer — not a cold inquiry.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-number">02</span>
+        <h3>EARN Routes the Referral to the Territory Holder</h3>
+        <p>No searching for a trusted agent in an unfamiliar market. Each territory has one exclusive holder. The referral is routed to them automatically.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-number">03</span>
+        <h3>The Territory Holder Closes. Full Commission Retained.</h3>
+        <p>Standard agent-to-agent referral terms apply between members. EARN facilitates the connection and the agreement. It never takes a commission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ANTI-PLATFORM (No Noise)
+     ═══════════════════════════════════════ -->
+<section class="anti-platform">
+  <div class="anti-platform-inner">
+    <div class="anti-header fade-in-subtle">
+      <h2>No Masterminds. No Group Chats.<br>No Forums. Just Revenue.</h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     TERRITORY MAP (City Carousel)
+     ═══════════════════════════════════════ -->
+<section class="territory">
+  <div class="territory-inner">
+    <div class="territory-header fade-in-rise">
+      <h2>Exclusivity.</h2>
+      <p>Each territory is held by one agent. All inbound referral volume for that market routes exclusively to the territory holder. No rotation. No competition.</p>
+    </div>
+
+    <div class="territory-carousel-wrap fade-in" style="transition-delay:0.15s;">
+      <div class="territory-carousel-fade-l"></div>
+      <div class="territory-carousel-fade-r"></div>
+      <div class="territory-carousel-scroll">
+        <div class="territory-carousel-track">
+          <!-- SET 1 -->
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="vancouver-dw" style="background-image:url(/images/territories/vancouver-dw.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Vancouver</span>
+              <span class="territory-card-area">Downtown & West End</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="toronto" style="background-image:url(/images/territories/toronto.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Toronto</span>
+              <span class="territory-card-area">West End</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="calgary" style="background-image:url(/images/territories/calgary.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Calgary</span>
+              <span class="territory-card-area">Central Calgary</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="montreal" style="background-image:url(/images/territories/montreal.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Montreal</span>
+              <span class="territory-card-area">Downtown & Central Districts</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="ottawa-e" style="background-image:url(/images/territories/ottawa-e.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Ottawa</span>
+              <span class="territory-card-area">East Ottawa</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Winnipeg</span>
+              <span class="territory-card-area">Central Winnipeg</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="edmonton" style="background-image:url(/images/territories/edmonton.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Edmonton</span>
+              <span class="territory-card-area">South Edmonton</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="victoria" style="background-image:url(/images/territories/victoria.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Victoria</span>
+              <span class="territory-card-area">Victoria</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="north-van" style="background-image:url(/images/territories/north-van.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">North Vancouver</span>
+              <span class="territory-card-area">North Vancouver</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="belleville" style="background-image:url(/images/territories/belleville.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Belleville</span>
+              <span class="territory-card-area">Belleville</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="saanich" style="background-image:url(/images/territories/saanich.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Saanich</span>
+              <span class="territory-card-area">Saanich</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="hamilton" style="background-image:url(/images/territories/hamilton.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Hamilton</span>
+              <span class="territory-card-area">Ancaster, Dundas & West Hamilton</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="sudbury" style="background-image:url(/images/territories/sudbury.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Sudbury</span>
+              <span class="territory-card-area">Sudbury</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <!-- SET 2 (duplicate for infinite scroll) -->
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="vancouver-dw" style="background-image:url(/images/territories/vancouver-dw.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Vancouver</span>
+              <span class="territory-card-area">Downtown & West End</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="toronto" style="background-image:url(/images/territories/toronto.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Toronto</span>
+              <span class="territory-card-area">West End</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="calgary" style="background-image:url(/images/territories/calgary.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Calgary</span>
+              <span class="territory-card-area">Central Calgary</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="montreal" style="background-image:url(/images/territories/montreal.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Montreal</span>
+              <span class="territory-card-area">Downtown & Central Districts</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="ottawa-e" style="background-image:url(/images/territories/ottawa-e.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Ottawa</span>
+              <span class="territory-card-area">East Ottawa</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="winnipeg" style="background-image:url(/images/territories/winnipeg.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Winnipeg</span>
+              <span class="territory-card-area">Central Winnipeg</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="edmonton" style="background-image:url(/images/territories/edmonton.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Edmonton</span>
+              <span class="territory-card-area">South Edmonton</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="victoria" style="background-image:url(/images/territories/victoria.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Victoria</span>
+              <span class="territory-card-area">Victoria</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="north-van" style="background-image:url(/images/territories/north-van.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">North Vancouver</span>
+              <span class="territory-card-area">North Vancouver</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="belleville" style="background-image:url(/images/territories/belleville.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Belleville</span>
+              <span class="territory-card-area">Belleville</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="saanich" style="background-image:url(/images/territories/saanich.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Saanich</span>
+              <span class="territory-card-area">Saanich</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+          <div class="territory-card available">
+            <div class="territory-card-img" data-city="hamilton" style="background-image:url(/images/territories/hamilton.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Hamilton</span>
+              <span class="territory-card-area">Ancaster, Dundas & West Hamilton</span>
+              <span class="territory-card-status available"><span class="pulse-dot white"></span>Available</span>
+            </div>
+          </div>
+          <div class="territory-card claimed">
+            <div class="territory-card-img" data-city="sudbury" style="background-image:url(/images/territories/sudbury.webp);"></div>
+            <div class="territory-card-overlay"></div>
+            <div class="territory-card-content">
+              <span class="territory-card-city">Sudbury</span>
+              <span class="territory-card-area">Sudbury</span>
+              <span class="territory-card-status claimed"><span class="pulse-dot gold"></span>Reserved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="text-align:center;margin-top:32px;transition-delay:0.25s;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:16px;">
+        <div class="legend-item"><div class="legend-dot gold"></div><span class="legend-text">Reserved</span></div>
+        <div class="legend-item"><div class="legend-dot white"></div><span class="legend-text">Available</span></div>
+      </div>
+      <p style="font-size:13px;font-style:italic;color:#52525b;">Territories are secured upon application approval.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     MEMBERSHIP (Agent Carousel)
+     ═══════════════════════════════════════ -->
+<section class="membership">
+  <div class="membership-header fade-in-rise">
+    <span style="font-size:12px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:#787060;">Elite Members</span>
+    <h2 style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2.5rem,5vw,4.5rem);">The Standard.</h2>
+    <p>Every territory holder in the network represents the highest tier of production and client service in their market.</p>
+  </div>
+
+  <div class="members-carousel-wrap fade-in" style="transition-delay:0.2s;">
+    <div class="members-fade-l"></div>
+    <div class="members-fade-r"></div>
+    <div class="members-scroll">
+      <div class="members-track">
+        <!-- Set 1 -->
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-knoxville.webp" alt="EARN Agent - Knoxville"></div><div class="member-info-wrap"><div class="member-name">Thomas Reeves</div><div class="member-territory">Knoxville</div><div class="glass-badge member-volume" style="border-radius:9999px;">$68M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-aspen.webp" alt="EARN Agent - Aspen"></div><div class="member-info-wrap"><div class="member-name">Marcus Hale</div><div class="member-territory">Aspen</div><div class="glass-badge member-volume" style="border-radius:9999px;">$82M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-vancouver.webp" alt="EARN Agent - Vancouver"></div><div class="member-info-wrap"><div class="member-name">Dominic Voss</div><div class="member-territory">Vancouver</div><div class="glass-badge member-volume" style="border-radius:9999px;">$57M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-charleston.webp" alt="EARN Agent - Charleston"></div><div class="member-info-wrap"><div class="member-name">Caroline Monroe</div><div class="member-territory">Charleston</div><div class="glass-badge member-volume" style="border-radius:9999px;">$61M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-las-vegas.webp" alt="EARN Agent - Las Vegas"></div><div class="member-info-wrap"><div class="member-name">Natasha Kaine</div><div class="member-territory">Las Vegas</div><div class="glass-badge member-volume" style="border-radius:9999px;">$75M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-arlington.webp" alt="EARN Agent - Arlington"></div><div class="member-info-wrap"><div class="member-name">Jonathan Pierce</div><div class="member-territory">Arlington</div><div class="glass-badge member-volume" style="border-radius:9999px;">$78M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-scottsdale.webp" alt="EARN Agent - Scottsdale"></div><div class="member-info-wrap"><div class="member-name">Sophia Ramirez</div><div class="member-territory">Scottsdale</div><div class="glass-badge member-volume" style="border-radius:9999px;">$64M ANNUAL VOLUME</div></div></div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-knoxville.webp" alt="EARN Agent - Knoxville"></div><div class="member-info-wrap"><div class="member-name">Thomas Reeves</div><div class="member-territory">Knoxville</div><div class="glass-badge member-volume" style="border-radius:9999px;">$68M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-aspen.webp" alt="EARN Agent - Aspen"></div><div class="member-info-wrap"><div class="member-name">Marcus Hale</div><div class="member-territory">Aspen</div><div class="glass-badge member-volume" style="border-radius:9999px;">$82M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-vancouver.webp" alt="EARN Agent - Vancouver"></div><div class="member-info-wrap"><div class="member-name">Dominic Voss</div><div class="member-territory">Vancouver</div><div class="glass-badge member-volume" style="border-radius:9999px;">$57M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-charleston.webp" alt="EARN Agent - Charleston"></div><div class="member-info-wrap"><div class="member-name">Caroline Monroe</div><div class="member-territory">Charleston</div><div class="glass-badge member-volume" style="border-radius:9999px;">$61M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-las-vegas.webp" alt="EARN Agent - Las Vegas"></div><div class="member-info-wrap"><div class="member-name">Natasha Kaine</div><div class="member-territory">Las Vegas</div><div class="glass-badge member-volume" style="border-radius:9999px;">$75M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-arlington.webp" alt="EARN Agent - Arlington"></div><div class="member-info-wrap"><div class="member-name">Jonathan Pierce</div><div class="member-territory">Arlington</div><div class="glass-badge member-volume" style="border-radius:9999px;">$78M ANNUAL VOLUME</div></div></div>
+        <div class="glass member-card" style="border-radius:16px;"><div class="member-photo"><img src="/images/agents/agent-scottsdale.webp" alt="EARN Agent - Scottsdale"></div><div class="member-info-wrap"><div class="member-name">Sophia Ramirez</div><div class="member-territory">Scottsdale</div><div class="glass-badge member-volume" style="border-radius:9999px;">$64M ANNUAL VOLUME</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     MEMBER CREDENTIAL
+     ═══════════════════════════════════════ -->
+<section class="member-credential">
+  <div class="member-credential-bg"></div>
+  <div class="member-credential-fade-top"></div>
+  <div class="member-credential-fade-bottom"></div>
+  <div class="mc-inner" style="position:relative;z-index:2;">
+    <h2 class="mc-headline">Certified Elite.</h2>
+    <div class="mc-seal fade-in-scale" style="transition-delay:0.6s;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 285" width="280" height="307">
+        <g transform="translate(130,130)">
+          <circle r="76" fill="none" stroke="#918268" stroke-width="2"/>
+          <circle r="72" fill="none" stroke="#918268" stroke-width="0.5"/>
+          <path id="topRingSeal" d="M-58,0 a58,58 0 1,1 116,0" fill="none"/>
+          <text font-family="'Inter',sans-serif" font-size="7.5" font-weight="600" letter-spacing="0.22em" fill="#918268">
+            <textPath href="#topRingSeal" startOffset="50%" text-anchor="middle">ELITE AGENT REFERRAL NETWORK</textPath>
+          </text>
+          <path id="botRingSeal" d="M-58,0 a58,58 0 0,0 116,0" fill="none"/>
+          <text font-family="'Inter',sans-serif" font-size="7.5" font-weight="500" letter-spacing="0.22em" fill="#918268">
+            <textPath href="#botRingSeal" startOffset="50%" text-anchor="middle">VERIFIED MEMBER</textPath>
+          </text>
+          <circle cx="-60" cy="8" r="2" fill="#918268"/>
+          <circle cx="60" cy="8" r="2" fill="#918268"/>
+          <circle r="40" fill="none" stroke="#918268" stroke-width="0.5"/>
+          <text x="0" y="14" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="52" font-weight="600" fill="#918268">E</text>
+        </g>
+        <text x="130" y="240" text-anchor="middle" fill="#918268" font-family="'Inter',sans-serif" font-size="10" font-weight="500" letter-spacing="0.18em">ELITE AGENT REFERRAL NETWORK</text>
+        <text x="130" y="270" text-anchor="middle" fill="white" font-family="'Cormorant Garamond',Georgia,serif" font-size="22" font-weight="400" letter-spacing="0.02em">Verified Member</text>
+      </svg>
+    </div>
+    <p class="mc-statement fade-in-subtle" style="transition-delay:1.2s;">A credential mark issued to every territory holder. Displayed on member websites, signatures, and client-facing materials.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOUNDER NOTE
+     ═══════════════════════════════════════ -->
+<section class="founder">
+  <div class="founder-inner">
+    <div>
+      <blockquote>
+        <p>"I built EARN because I was tired of referral roulette. I wanted a black book of the best agents in North America. This is that black book."</p>
+        <footer class="founder-footer">
+          <div class="founder-divider"></div>
+          <div class="founder-avatar">
+            <img src="/images/founder-liam-mckinney.webp" alt="Liam McKinney, Founder of EARN">
+          </div>
+          <cite style="font-style:normal;">
+            <span class="founder-name">Liam McKinney</span>
+            <span class="founder-title" style="display:block;">Founder</span>
+          </cite>
+          <a href="/team" class="founder-team-link">Leadership →</a>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER SECTION
+     ═══════════════════════════════════════ -->
+<footer class="footer-section">
+  <div class="footer-border-top"></div>
+  <div class="footer-cta fade-in-subtle">
+    <h2>Acceptance is by Invitation or Nomination.</h2>
+    <div class="shader-btn-wrap" data-shader-btn><canvas></canvas><button class="shader-btn lg" onclick="window.location.href='/application'">Request Territory Access</button></div>
+  </div>
+  <div class="footer-bottom-outer">
+    <div class="footer-bottom">
+      <div class="footer-left">
+        <div>
+          <p>&copy;2026 Elite Agent Referral Network Inc.</p>
+          <p>All rights reserved.</p>
+        </div>
+        <a href="tel:18884225881">1 (888) 422-5881</a>
+      </div>
+      <div class="footer-center">
+        <a href="/"><img src="/images/earn-logo.png" alt="EARN" style="height:32px;width:auto;"></a>
+      </div>
+      <div class="footer-right">
+        <a href="/disclaimers">Disclaimers</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-and-conditions">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<!-- Scroll progress bar -->
+<div id="scrollProgress" style="position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(to right,rgba(145,130,104,0.6),rgba(145,130,104,0.9));z-index:100;transition:width 0.05s linear;pointer-events:none;"></div>
+
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+// ── Navbar scroll effect ──
+const navPill = document.getElementById('navPill');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    navPill.classList.add('scrolled');
+  } else {
+    navPill.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+// ── Fade-in on scroll (IntersectionObserver) ──
+const fadeEls = document.querySelectorAll('.fade-in, .fade-in-subtle, .fade-in-scale, .fade-in-rise');
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+fadeEls.forEach(el => fadeObserver.observe(el));
+
+// ── Phone notification sequence ──
+const phoneMock = document.getElementById('phoneMock');
+let phoneTriggered = false;
+
+const phoneObserver = new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting && !phoneTriggered) {
+    phoneTriggered = true;
+    // Screen wake
+    setTimeout(() => {
+      document.getElementById('phoneGlow').classList.add('visible');
+      document.getElementById('phoneTime').classList.add('visible');
+      document.getElementById('phoneBar').classList.add('visible');
+      document.getElementById('lockShortcuts').classList.add('visible');
+    }, 500);
+
+    // Notifications: start after screen is awake
+    setTimeout(() => {
+      document.getElementById('notif0').classList.add('visible');
+    }, 1200);
+    setTimeout(() => {
+      document.getElementById('notif1').classList.add('visible');
+    }, 2400);
+    setTimeout(() => {
+      document.getElementById('notif2').classList.add('visible');
+      document.getElementById('phoneAmbient').classList.add('visible');
+    }, 3600);
+  }
+}, { threshold: 0.3 });
+phoneObserver.observe(phoneMock);
+
+// ── Shader Buttons (WebGL liquid metal — dormant until hover) ──
+(function() {
+  const vertSrc = `
+    attribute vec2 a_position;
+    void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+  `;
+
+  const fragSrc = `
+    precision highp float;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_hover;
+
+    vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}
+
+    float snoise(vec2 v){
+      const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+      vec2 i=floor(v+dot(v,C.yy));
+      vec2 x0=v-i+dot(i,C.xx);
+      vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);
+      vec4 x12=x0.xyxy+C.xxzz;
+      x12.xy-=i1;
+      i=mod289(i);
+      vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+      vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);
+      m=m*m*m*m;
+      vec3 x=2.0*fract(p*C.www)-1.0;
+      vec3 h=abs(x)-0.5;
+      vec3 ox=floor(x+0.5);
+      vec3 a0=x-ox;
+      m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);
+      vec3 g;
+      g.x=a0.x*x0.x+h.x*x0.y;
+      g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+      return 130.0*dot(m,g);
+    }
+
+    void main(){
+      vec2 uv=gl_FragCoord.xy/u_resolution;
+      float aspect=u_resolution.x/u_resolution.y;
+      vec2 p=(uv-0.5)*vec2(aspect,1.0);
+
+      float r=0.44;
+      float hw=max(0.5*aspect-r,0.0);
+      vec2 q=vec2(max(abs(p.x)-hw,0.0),p.y);
+      float d=length(q)-r;
+
+      float angle=atan(p.y,p.x);
+      float dist=length(p);
+
+      // Time: crawling at rest, flowing on hover
+      float live_t=u_time*0.35;
+      float t=mix(u_time*0.04, live_t, u_hover);
+
+      float n1=snoise(vec2(uv.x*4.0+t,uv.y*5.0-t*0.6))*0.45;
+      float n2=snoise(vec2(uv.x*8.0-t*0.7,uv.y*8.0+t*0.4))*0.3;
+      float n3=snoise(vec2(angle*1.2+t*0.6,dist*5.0-t*0.4))*0.2;
+      float noise=n1+n2+n3;
+
+      float verticalBias=abs(p.y)/(r*0.9);
+      verticalBias=smoothstep(0.3,1.0,verticalBias);
+
+      float blend=noise*0.5+0.5;
+      blend=blend-verticalBias*0.3;
+
+      // Dormant: polished gunmetal with visible grain
+      vec3 d_dark=vec3(0.30,0.29,0.27);
+      vec3 d_mid=vec3(0.52,0.50,0.47);
+      vec3 d_bright=vec3(0.68,0.65,0.60);
+
+      vec3 dormant_col=mix(d_dark,d_mid,smoothstep(0.15,0.5,blend));
+      dormant_col=mix(dormant_col,d_bright,smoothstep(0.6,0.85,blend));
+      // Dormant specular — frozen highlights
+      float d_spec=pow(max(snoise(vec2(uv.x*10.0+3.7*2.0,uv.y*10.0-3.7)),0.0),4.0);
+      dormant_col+=d_spec*0.10;
+
+      // Active: same palette as dormant — hover only unlocks motion
+      vec3 active_col=mix(d_dark,d_mid,smoothstep(0.15,0.5,blend));
+      active_col=mix(active_col,d_bright,smoothstep(0.6,0.85,blend));
+      float a_spec=pow(max(snoise(vec2(uv.x*10.0+t*2.0,uv.y*10.0-t)),0.0),4.0);
+      active_col+=a_spec*0.10;
+
+      vec3 col=mix(dormant_col, active_col, u_hover);
+
+      // Ring
+      float bw=0.020;
+      float aa=0.003;
+      float inner=smoothstep(aa,-aa,d);
+      float outer=smoothstep(-bw+aa,-bw-aa,d);
+      float ring=inner-outer;
+
+      // Glow: constant faint warmth
+      float glow=smoothstep(0.05,0.0,d)*0.06;
+
+      float alpha=ring*0.85+glow;
+      vec3 glow_col=vec3(0.55,0.53,0.50);
+      vec3 final_col=col*ring+glow_col*glow*0.4;
+
+      gl_FragColor=vec4(final_col,alpha);
+    }
+  `;
+
+  function initShaderButton(wrap) {
+    var canvas = wrap.querySelector('canvas');
+    if (!canvas) return;
+    var gl = canvas.getContext('webgl', {premultipliedAlpha:false, alpha:true});
+    if (!gl) return;
+
+    function makeShader(type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); return null; }
+      return s;
+    }
+
+    var vs = makeShader(gl.VERTEX_SHADER, vertSrc);
+    var fs = makeShader(gl.FRAGMENT_SHADER, fragSrc);
+    var prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { console.error(gl.getProgramInfoLog(prog)); return; }
+    gl.useProgram(prog);
+
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'a_position');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    var uRes = gl.getUniformLocation(prog, 'u_resolution');
+    var uTime = gl.getUniformLocation(prog, 'u_time');
+    var uHover = gl.getUniformLocation(prog, 'u_hover');
+
+    var hover = 0, targetHover = 0;
+    var isVisible = false;
+    var rafId = null;
+    wrap.addEventListener('mouseenter', function(){ targetHover = 1; });
+    wrap.addEventListener('mouseleave', function(){ targetHover = 0; });
+
+    function resize() {
+      var rect = wrap.getBoundingClientRect();
+      var dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = (rect.width + 8) * dpr;
+      canvas.height = (rect.height + 8) * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    var t0 = performance.now();
+    function render() {
+      if (!isVisible) { rafId = null; return; }
+      hover += (targetHover - hover) * 0.045;
+      gl.clearColor(0,0,0,0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (performance.now() - t0) / 1000);
+      gl.uniform1f(uHover, hover);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      rafId = requestAnimationFrame(render);
+    }
+
+    // Viewport-aware: only render when visible
+    var shaderObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !rafId) {
+          rafId = requestAnimationFrame(render);
+        }
+      });
+    }, { threshold: 0 });
+    shaderObserver.observe(wrap);
+  }
+
+  document.querySelectorAll('[data-shader-btn]').forEach(initShaderButton);
+})();
+
+
+// ── Animated Counters ──
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const start = parseInt(el.dataset.start || '0');
+      const suffix = el.dataset.suffix || '';
+      const duration = parseInt(el.dataset.duration || '2000');
+      const startTime = performance.now();
+      const countingDown = start > target;
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        let current;
+        if (countingDown) {
+          current = Math.round(start - (start - target) * eased);
+        } else {
+          current = Math.round(start + (target - start) * eased);
+        }
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObserver.observe(el));
+// ── Mobile menu toggle ──
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+}
+
+// ── Scroll progress bar ──
+const scrollBar = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  scrollBar.style.width = progress + '%';
+}, { passive: true });
+
+// ── Single-pulse available dots on viewport enter ──
+const pulseDots = document.querySelectorAll('.pulse-dot.white');
+const pulseObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('pulse-once');
+      pulseObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+pulseDots.forEach(dot => pulseObserver.observe(dot));
+
+</script>
+
+<!-- Spline 3D Globe -->
+<script type="module">
+import { Application } from 'https://unpkg.com/@splinetool/runtime@1.9.82/build/runtime.js';
+
+const canvas = document.getElementById('splineCanvas');
+if (canvas) {
+  const app = new Application(canvas);
+  app.load('https://prod.spline.design/VAR5hzQT1W2wcfmc/scene.splinecode').then(() => {
+    // Globe loaded — fade it in
+    const globe = document.getElementById('splineGlobe');
+    globe.style.opacity = '1';
+
+    // Viewport-aware: pause Spline when hero is not visible
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      let splinePlaying = true;
+      const globeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !splinePlaying) {
+            if (app.play) app.play();
+            splinePlaying = true;
+          } else if (!entry.isIntersecting && splinePlaying) {
+            if (app.stop) app.stop();
+            splinePlaying = false;
+          }
+        });
+      }, { threshold: 0 });
+      globeObserver.observe(heroSection);
+    }
+  }).catch(err => {
+    console.warn('Spline globe failed to load:', err);
+    // Fallback: show a subtle CSS gradient globe
+    const globe = document.getElementById('splineGlobe');
+    globe.style.opacity = '1';
+    globe.style.background = 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)';
+    globe.style.borderRadius = '50%';
+    globe.style.width = '420px';
+    globe.style.height = '420px';
+    canvas.style.display = 'none';
+  });
+}
+</script>
+
+</body>
+</html>
