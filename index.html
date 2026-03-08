@@ -621,12 +621,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background-position: center 20%;
   filter: brightness(0.5);
 }
-/* Gentle vignette: subtle darkening at bottom, not a blackout */
+/* Gentle vignette: barely-there darkening at bottom */
 .phone-wallpaper::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.35) 85%, rgba(0,0,0,0.5) 100%);
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.2) 90%, rgba(0,0,0,0.3) 100%);
 }
 .phone-screen::after {
   content: '';
