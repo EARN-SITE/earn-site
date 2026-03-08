@@ -2894,18 +2894,22 @@ if (canvas) {
     const globe = document.getElementById('splineGlobe');
     globe.style.opacity = '1';
 
-    // Viewport-aware: pause Spline when hero is not visible
+    // Viewport-aware: hide Spline canvas when hero is not visible
+    // Using visibility + stopping the app prevents all GPU activity.
+    // play/stop alone doesn't halt Spline's particle/shader systems.
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
-      let splinePlaying = true;
+      let splineVisible = true;
       const globeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !splinePlaying) {
+          if (entry.isIntersecting && !splineVisible) {
+            canvas.style.visibility = 'visible';
             if (app.play) app.play();
-            splinePlaying = true;
-          } else if (!entry.isIntersecting && splinePlaying) {
+            splineVisible = true;
+          } else if (!entry.isIntersecting && splineVisible) {
             if (app.stop) app.stop();
-            splinePlaying = false;
+            canvas.style.visibility = 'hidden';
+            splineVisible = false;
           }
         });
       }, { threshold: 0 });
