@@ -501,7 +501,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ═══════════════════════════════════════
-   UNFAIR ADVANTAGE (Phone + Copy)
+   UNFAIR ADVANTAGE (Phone + Notifications)
+   Photorealistic iPhone 15 Pro + iOS notifications
    ═══════════════════════════════════════ */
 .unfair {
   position: relative;
@@ -524,147 +525,475 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .unfair-inner {
   max-width: 1152px;
   margin: 0 auto;
-}
-@media (max-width: 768px) {
+  text-align: center;
 }
 
-/* Phone mockup */
+/* iPhone 15 Pro frame */
 .phone-wrap { display: flex; justify-content: center; }
 .phone-body {
   position: relative;
-  width: 280px;
-  height: 570px;
+  width: 285px;
+  height: 582px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4))
+          drop-shadow(0 24px 60px rgba(0,0,0,0.5));
 }
 .phone-frame {
   position: absolute;
   inset: 0;
-  border-radius: 44px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: linear-gradient(145deg, rgba(30,30,30,0.9) 0%, rgba(10,10,10,0.95) 100%);
-  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.08), inset 0 -1px 0 0 rgba(255,255,255,0.02), 0 24px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+  border-radius: 50px;
+  background:
+    linear-gradient(165deg,
+      rgba(58,58,60,1) 0%,
+      rgba(44,44,46,1) 15%,
+      rgba(38,38,40,1) 40%,
+      rgba(28,28,30,1) 70%,
+      rgba(22,22,24,1) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,0.13),
+    inset 0 2px 0 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 0 rgba(255,255,255,0.04),
+    inset 1px 0 0 0 rgba(255,255,255,0.07),
+    inset -1px 0 0 0 rgba(255,255,255,0.07),
+    0 0 0 0.5px rgba(255,255,255,0.1),
+    0 1px 3px rgba(0,0,0,0.3),
+    0 8px 24px rgba(0,0,0,0.35),
+    0 24px 60px rgba(0,0,0,0.4);
 }
-.phone-island {
+.phone-frame::before {
+  content: '';
   position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  width: 100px;
-  height: 28px;
-  border-radius: 9999px;
-  background: black;
+  right: -1.5px;
+  top: 148px;
+  width: 3px;
+  height: 44px;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: 1px 0 0 0 rgba(255,255,255,0.06);
 }
+.phone-frame::after {
+  content: '';
+  position: absolute;
+  left: -1.5px;
+  top: 120px;
+  width: 3px;
+  height: 32px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+.phone-action-btn {
+  position: absolute;
+  left: -1.5px;
+  top: 87px;
+  width: 3px;
+  height: 22px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+.phone-vol2 {
+  position: absolute;
+  left: -1.5px;
+  top: 162px;
+  width: 3px;
+  height: 32px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(180deg, rgba(60,60,62,1) 0%, rgba(48,48,50,1) 50%, rgba(38,38,40,1) 100%);
+  box-shadow: -1px 0 0 0 rgba(255,255,255,0.06);
+}
+
+/* Screen */
 .phone-screen {
   position: absolute;
-  inset: 4px;
-  border-radius: 40px;
-  background: black;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border-radius: 46px;
+  background: #000000;
   overflow: hidden;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.8);
 }
-.phone-screen-glow {
+.phone-wallpaper {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.03) 0%, transparent 70%);
+  z-index: 0;
+  background-image: url('/images/silk-black-wallpaper.webp');
+  background-size: cover;
+  background-position: center 20%;
+  filter: brightness(0.5);
+}
+.phone-screen::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.012) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Dynamic Island */
+.phone-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: 120px;
+  height: 36px;
+  border-radius: 20px;
+  background: #000000;
+  box-shadow: 0 0 0 0.5px rgba(0,0,0,1), inset 0 0 2px rgba(0,0,0,1);
+}
+.phone-island::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(30,30,40,1) 0%, rgba(15,15,20,1) 50%, rgba(8,8,12,1) 100%);
+  box-shadow: 0 0 0 1px rgba(40,40,50,0.6), inset 0 0 2px rgba(0,0,0,0.8);
+}
+
+.phone-screen-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.02) 0%, transparent 65%);
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 2s ease;
+  z-index: 1;
 }
 .phone-screen-glow.visible { opacity: 1; }
 
-.phone-time {
+/* iOS Status Bar */
+.ios-status-bar {
   position: absolute;
-  top: 56px;
-  left: 0;
-  right: 0;
+  top: 14px;
+  left: 36px;
+  right: 36px;
+  z-index: 40;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  opacity: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
 }
-.phone-time.visible { opacity: 1; transform: translateY(0); }
-.phone-time .time {
-  font-family: var(--font-sans);
-  font-size: 64px;
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: rgba(255,255,255,0.9);
-  font-feature-settings: "tnum";
+.ios-status-time {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.02em;
 }
-.phone-time .date {
-  margin-top: 4px;
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 0.025em;
-  color: rgba(255,255,255,0.4);
-}
-
-.phone-notifications {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: 180px;
+.ios-status-icons {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 3px;
 }
-.phone-notif {
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px 16px;
-  background: rgba(40, 40, 40, 0.75);
-  backdrop-filter: blur(24px) saturate(150%);
-  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.4);
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.phone-notif.visible { opacity: 1; transform: translateY(0); }
-
-.notif-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.notif-icon {
+.ios-cellular {
   display: flex;
-  width: 20px;
-  height: 20px;
+  align-items: flex-end;
+  gap: 1px;
+  height: 8px;
+}
+.ios-cellular-bar {
+  width: 2px;
+  border-radius: 0.5px;
+  background: rgba(255,255,255,0.8);
+}
+.ios-cellular-bar:nth-child(1) { height: 2.5px; }
+.ios-cellular-bar:nth-child(2) { height: 4px; }
+.ios-cellular-bar:nth-child(3) { height: 5.5px; }
+.ios-cellular-bar:nth-child(4) { height: 7px; opacity: 0.3; }
+.ios-battery {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.ios-battery-body {
+  width: 18px;
+  height: 8.5px;
+  border-radius: 2px;
+  border: 0.8px solid rgba(255,255,255,0.3);
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.1);
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--gold);
 }
-.notif-app { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-.notif-time { margin-left: auto; font-size: 10px; color: rgba(255,255,255,0.3); }
-.notif-title { font-size: 12px; font-weight: 500; line-height: 1.4; color: rgba(255,255,255,0.9); }
-.notif-detail { margin-top: 2px; font-size: 10px; line-height: 1.5; color: rgba(255,255,255,0.4); }
+.ios-battery-fill {
+  position: absolute;
+  top: 1.5px; left: 1.5px; bottom: 1.5px;
+  width: 60%;
+  border-radius: 0.8px;
+  background: rgba(255,255,255,0.8);
+}
+.ios-battery-pct {
+  position: relative;
+  z-index: 2;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 6px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  line-height: 1;
+}
+.ios-battery-cap {
+  width: 1px;
+  height: 3px;
+  border-radius: 0 0.8px 0.8px 0;
+  background: rgba(255,255,255,0.3);
+}
 
+/* Lock Screen Clock */
+.phone-time {
+  position: absolute;
+  top: 55px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.phone-time.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.phone-time .date {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-sans), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2px;
+}
+.phone-time .time {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-sans), system-ui, sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.95);
+  font-feature-settings: "tnum";
+}
+
+/* iOS Notifications */
+.phone-notifications {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  z-index: 20;
+  text-align: left;
+}
+.phone-notif {
+  border-radius: 14px;
+  padding: 10px 11px;
+  background:
+    linear-gradient(180deg,
+      rgba(58, 58, 60, 0.62) 0%,
+      rgba(42, 42, 44, 0.58) 100%
+    );
+  -webkit-backdrop-filter: blur(30px) saturate(160%) brightness(1.05);
+  backdrop-filter: blur(30px) saturate(160%) brightness(1.05);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255,255,255,0.1),
+    0 0 0 0.5px rgba(255,255,255,0.04),
+    0 2px 6px rgba(0,0,0,0.3),
+    0 6px 16px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-12px) scale(0.97);
+}
+@keyframes notifSlideIn {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  40% { opacity: 1; transform: translateY(2px) scale(1.005); }
+  65% { transform: translateY(-1px) scale(0.999); }
+  80% { transform: translateY(0.5px) scale(1.001); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.phone-notif.visible {
+  animation: notifSlideIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* App Icon */
+.notif-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.08),
+    0 1px 2px rgba(0,0,0,0.3);
+}
+.notif-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Notification Content */
+.notif-content {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+.notif-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1px;
+}
+.notif-app {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+.notif-time {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.28);
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+.notif-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.92);
+  text-align: left;
+}
+.notif-detail {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.42);
+  text-align: left;
+  margin-top: 1px;
+}
+
+/* Home Indicator */
 .phone-bar {
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
-  height: 5px;
+  height: 4px;
   border-radius: 9999px;
   background: rgba(255,255,255,0.2);
+  z-index: 30;
   opacity: 0;
-  transition: opacity 1.5s 0.8s;
+  transition: opacity 1.2s 0.6s ease;
 }
 .phone-bar.visible { opacity: 1; }
 
+/* Lock Screen Shortcuts */
+.ios-lock-shortcuts {
+  position: absolute;
+  bottom: 20px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 25;
+  opacity: 0;
+  transition: opacity 1.5s 1s ease;
+}
+.ios-lock-shortcuts.visible { opacity: 1; }
+.ios-lock-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(50,50,52,0.5);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.ios-flashlight::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: 1.2px solid rgba(255,255,255,0.7);
+  border-radius: 1px 1px 2px 2px;
+  display: block;
+}
+.ios-camera::after {
+  content: '';
+  width: 11px;
+  height: 8px;
+  border: 1.2px solid rgba(255,255,255,0.7);
+  border-radius: 1.5px;
+  display: block;
+}
+
+/* Ambient Glow */
 .phone-glow {
   position: absolute;
   inset: -160px;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 45%, rgba(145,130,104,0.08) 0%, rgba(145,130,104,0.04) 30%, rgba(145,130,104,0.01) 55%, transparent 80%);
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(145,130,104,0.08) 0%,
+    rgba(145,130,104,0.04) 30%,
+    rgba(145,130,104,0.01) 55%,
+    transparent 80%
+  );
   opacity: 0;
-  transition: opacity 3s;
+  transition: opacity 3s ease;
 }
 .phone-glow.visible { opacity: 1; }
 
-/* Right copy */
+/* Phone responsive */
+@media (max-width: 480px) {
+  .phone-body { width: 250px; height: 510px; }
+  .phone-frame { border-radius: 44px; }
+  .phone-screen { border-radius: 41px; }
+  .phone-island { width: 100px; height: 30px; top: 10px; }
+  .phone-time .time { font-size: 48px; }
+  .phone-time { top: 50px; }
+  .phone-notifications { top: 140px; gap: 6px; left: 8px; right: 8px; }
+  .notif-icon { width: 30px; height: 30px; border-radius: 7px; }
+  .phone-notif { padding: 9px; gap: 7px; border-radius: 12px; }
+  .notif-title { font-size: 11px; }
+  .notif-detail { font-size: 10px; }
+  .notif-app { font-size: 10px; }
+  .notif-time { font-size: 10px; }
+  .ios-lock-btn { width: 28px; height: 28px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .phone-notif.visible {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.3s ease;
+  }
+  .phone-time {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
+
+
 /* ═══════════════════════════════════════
    VETTING TICKER (Brokerage Marquee)
    ═══════════════════════════════════════ */
@@ -747,8 +1076,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .ticker-track img {
   height: 22px;
   width: auto;
-  filter: grayscale(100%) brightness(0.6);
-  opacity: 0.5;
+  filter: grayscale(100%) brightness(0.75);
+  opacity: 0.6;
 }
 @media (max-width: 768px) {
   .ticker-track { gap: 40px; padding-right: 40px; }
@@ -1633,54 +1962,150 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 </section>
 
 <!-- ═══════════════════════════════════════
-     UNFAIR ADVANTAGE (Phone + Copy)
+     UNFAIR ADVANTAGE (Phone + Notifications)
      ═══════════════════════════════════════ -->
 <section class="unfair" id="unfairSection">
-  <div class="unfair-inner" style="text-align:center;">
-    <h2 class="fade-in" style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:64px;text-wrap:balance;">EARN members don't chase leads. Client referrals are routed to them.</h2>
+  <div class="unfair-inner">
+    <h2 class="fade-in" style="font-family:'Cormorant Garamond','Georgia',serif;font-weight:400;letter-spacing:-0.03em;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:64px;color:#fff;text-wrap:balance;">EARN members don't chase leads. Client referrals are routed to them.</h2>
     <div style="display:flex;justify-content:center;">
       <div class="fade-in" style="transition-delay:0.2s;">
         <div class="phone-wrap">
           <div class="phone-body" id="phoneMock">
+
             <div class="phone-frame"></div>
+            <div class="phone-action-btn"></div>
+            <div class="phone-vol2"></div>
             <div class="phone-island"></div>
+
             <div class="phone-screen">
               <div class="phone-screen-glow" id="phoneGlow"></div>
-              <div class="phone-time" id="phoneTime">
-                <span class="time">9:41</span>
-                <span class="date">Thursday, February 13</span>
+              <div class="phone-wallpaper"></div>
+
+              <div class="ios-status-bar">
+                <span class="ios-status-time">9:41</span>
+                <div class="ios-status-icons">
+                  <div class="ios-cellular">
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                    <div class="ios-cellular-bar"></div>
+                  </div>
+                  <div class="ios-battery">
+                    <div class="ios-battery-body">
+                      <div class="ios-battery-fill"></div>
+                      <span class="ios-battery-pct">80</span>
+                    </div>
+                    <div class="ios-battery-cap"></div>
+                  </div>
+                </div>
               </div>
+
+              <div class="phone-time" id="phoneTime">
+                <span class="date">Thursday, February 13</span>
+                <span class="time">9:41</span>
+              </div>
+
               <div class="phone-notifications">
+
                 <div class="phone-notif" id="notif0">
-                  <div class="notif-header">
-                    <div class="notif-icon">E</div>
-                    <span class="notif-app">EARN</span>
-                    <span class="notif-time">now</span>
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge0" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig0" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic0"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic0)">
+                        <rect width="60" height="60" fill="url(#ib0)"/>
+                        <rect width="60" height="60" fill="url(#ig0)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo0)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge0)">E</text>
+                      </g>
+                    </svg>
                   </div>
-                  <div class="notif-title">Referral Assignment: $3.2M Buyer</div>
-                  <div class="notif-detail">Origin: Beverly Hills, CA · Status: Pending</div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">now</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $3.2M Buyer</div>
+                    <div class="notif-detail">Origin: Beverly Hills, CA · Pending</div>
+                  </div>
                 </div>
+
                 <div class="phone-notif" id="notif1">
-                  <div class="notif-header">
-                    <div class="notif-icon">E</div>
-                    <span class="notif-app">EARN</span>
-                    <span class="notif-time">3m ago</span>
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge1" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig1" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic1"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic1)">
+                        <rect width="60" height="60" fill="url(#ib1)"/>
+                        <rect width="60" height="60" fill="url(#ig1)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo1)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge1)">E</text>
+                      </g>
+                    </svg>
                   </div>
-                  <div class="notif-title">Referral Assignment: $1.6M Seller</div>
-                  <div class="notif-detail">Origin: Chicago, IL · Status: Pending</div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">3m ago</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $1.6M Seller</div>
+                    <div class="notif-detail">Origin: Chicago, IL · Pending</div>
+                  </div>
                 </div>
+
                 <div class="phone-notif" id="notif2">
-                  <div class="notif-header">
-                    <div class="notif-icon">E</div>
-                    <span class="notif-app">EARN</span>
-                    <span class="notif-time">6m ago</span>
+                  <div class="notif-icon">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ib2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#262624"/><stop offset="100%" stop-color="#131312"/></linearGradient>
+                        <linearGradient id="ge2" x1="0.2" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4b49a"/><stop offset="45%" stop-color="#918268"/><stop offset="100%" stop-color="#7a6d52"/></linearGradient>
+                        <radialGradient id="ig2" cx="40%" cy="25%" r="65%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                        <linearGradient id="bo2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+                        <clipPath id="ic2"><rect width="60" height="60" rx="13.4"/></clipPath>
+                      </defs>
+                      <g clip-path="url(#ic2)">
+                        <rect width="60" height="60" fill="url(#ib2)"/>
+                        <rect width="60" height="60" fill="url(#ig2)"/>
+                        <rect x="0.5" y="0.5" width="59" height="59" rx="12.9" fill="none" stroke="url(#bo2)" stroke-width="1"/>
+                        <path d="M13.4,0.5 L46.6,0.5 Q59.5,0.5 59.5,13.4" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+                        <path d="M0.5,46.6 Q0.5,0.5 0.5,13.4 L0.5,46.6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>
+                        <text x="30" y="42.5" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="40" font-weight="600" fill="url(#ge2)">E</text>
+                      </g>
+                    </svg>
                   </div>
-                  <div class="notif-title">Referral Assignment: $1.1M Buyer</div>
-                  <div class="notif-detail">Origin: Toronto, ON · Status: Pending</div>
+                  <div class="notif-content">
+                    <div class="notif-meta">
+                      <span class="notif-app">EARN</span>
+                      <span class="notif-time">6m ago</span>
+                    </div>
+                    <div class="notif-title">Referral Assignment: $1.1M Buyer</div>
+                    <div class="notif-detail">Origin: Toronto, ON · Pending</div>
+                  </div>
                 </div>
+
+              </div>
+
+              <div class="ios-lock-shortcuts" id="lockShortcuts">
+                <div class="ios-lock-btn ios-flashlight"></div>
+                <div class="ios-lock-btn ios-camera"></div>
               </div>
               <div class="phone-bar" id="phoneBar"></div>
             </div>
+
             <div class="phone-glow" id="phoneAmbient"></div>
           </div>
         </div>
@@ -2164,10 +2589,12 @@ let phoneTriggered = false;
 const phoneObserver = new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting && !phoneTriggered) {
     phoneTriggered = true;
-    // Screen wake — slight delay like the phone is responding
+    // Screen wake
     setTimeout(() => {
       document.getElementById('phoneGlow').classList.add('visible');
+      document.getElementById('phoneTime').classList.add('visible');
       document.getElementById('phoneBar').classList.add('visible');
+      document.getElementById('lockShortcuts').classList.add('visible');
     }, 500);
 
     // Notifications: start after screen is awake
